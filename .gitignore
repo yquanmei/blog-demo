@@ -23,9 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # egg
-/simple-request/egg-example/typings/
-/simple-request/egg-example/node_modules
-/simple-request/egg-example/typings
 /simple-request/egg-example/logs/
 /simple-request/egg-example/npm-debug.log
 /simple-request/egg-example/yarn-error.log
@@ -33,8 +30,14 @@ yarn-error.log*
 /simple-request/egg-example/package-lock.json
 /simple-request/egg-example/yarn.lock
 /simple-request/egg-example/coverage/
+.idea/
 /simple-request/egg-example/run/
+.DS_Store
 *.sw*
 *.un~
+/simple-request/egg-example/typings/
 .nyc_output/
+/simple-request/egg-example/.github
+/simple-request/egg-example/.gitignore
+
 
