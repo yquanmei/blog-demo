@@ -23,8 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # egg
-# /simple-request/egg-example/node_modules
 /simple-request/egg-example/typings/
+/simple-request/egg-example/node_modules
+/simple-request/egg-example/typings
 /simple-request/egg-example/logs/
 /simple-request/egg-example/npm-debug.log
 /simple-request/egg-example/yarn-error.log
@@ -36,3 +37,4 @@ yarn-error.log*
 *.sw*
 *.un~
 .nyc_output/
+
