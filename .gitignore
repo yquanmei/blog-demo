@@ -21,3 +21,18 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# egg
+# /simple-request/egg-example/node_modules
+/simple-request/egg-example/typings/
+/simple-request/egg-example/logs/
+/simple-request/egg-example/npm-debug.log
+/simple-request/egg-example/yarn-error.log
+/simple-request/egg-example/node_modules/
+/simple-request/egg-example/package-lock.json
+/simple-request/egg-example/yarn.lock
+/simple-request/egg-example/coverage/
+/simple-request/egg-example/run/
+*.sw*
+*.un~
+.nyc_output/
