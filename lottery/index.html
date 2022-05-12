@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvaId" width="400" height="400"></canvas>
+  <script>
+    var myCanvas = document.getElementById('canvaId');
+    const config = {
+      n: 6, // 画6个扇形
+      colorList: ['#f00', '#0f0'],
+    }
+    function getRads(degrees) {
+      return (Math.PI * degrees) / 180;
+    }
+    function getDegrees(rads) {
+      return (rads * 180) / Math.PI;
+    }
+
+    function drawMain(cavasEle, config) {
+      var ctx = cavasEle.getContext("2d");
+      const arc = {
+        x: myCanvas.width / 2,
+        y: myCanvas.height / 2,
+        r: 100
+      },
+        w = myCanvas.width,
+        h = myCanvas.height;
+      // 画每个扇形
+      return (start, end, color) => {
+        console.log(`%c start:::`, 'background-color: pink;font-size:14px;', start)
+        console.log(`%c end:::`, 'background-color: pink;font-size:14px;', end)
+        console.log(`%c color:::`, 'background-color: pink;font-size:14px;', color)
+
+        ctx.save();
+
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.beginPath();    // 起始点设置在圆心处
+        ctx.moveTo(arc.x, arc.y);
+        ctx.arc(arc.x, arc.y, arc.r, getRads(start), getRads(end), false);    // 闭合路径
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+    }
+
+    const drawScreen = drawMain(myCanvas, config)
+    //画每段扇形
+    const n = config.n;
+    for (let i = 0; i < n; i++) {
+      startP = 360 / n * i
+      endP = startP + 360 / n
+      drawScreen(
+        startP,
+        endP,
+        config.colorList[i % config.colorList.length]
+      );
+    }
+  </script>
+</body>
+
+
+</html>

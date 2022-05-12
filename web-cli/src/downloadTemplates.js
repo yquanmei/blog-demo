@@ -14,7 +14,6 @@ function downloadByGit(callback, template) {
   const { downloadUrl } = enums[template];
   const result = spawn(
     "git",
-    // ["clone", `http://gitlab.ichint.com/${downloadUrl}.git`],
     ['clone', `https://github.com/${downloadUrl}.git
     { stdio: "inherit" }
   );
