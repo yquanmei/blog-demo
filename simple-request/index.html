@@ -8,15 +8,25 @@
   <title>Document</title>
 </head>
 <div>
+  <div>简单请求</div>
+  <button onClick="fetchGet()">fetch，get</button>
   <hr>
+  <div>非简单请求</div>
   <h4>this is header：</h4>
-  <button onClick="xhrPost()">xhr, post</button>
-  <button onClick="fetchPost()">fetch, post</button>
+  <button onClick="xhrPost()">xhr, post(content-type)</button>
+  <button onClick="fetchPost()">fetch, post(content-type)</button>
   <hr>
+  <h4>this is ReadableStream:</h4>
+  <button onClick="fetchStream()">ReadableStream</button>
 </div>
 
 <body>
   <script>
+    function fetchGet() {
+      fetch('http://localhost:7001/api/test/get').then((data) => {
+        console.log("get简单请求成功了");
+      });
+    }
     function xhrPost() {
       let xmlhttp = new XMLHttpRequest();
       xmlhttp.open('POST', 'http://localhost:7001/api/test/post', true);
@@ -31,7 +41,32 @@
           'Content-Type': 'application/json'
         }
       }).then((data) => {
-        console.log("post请求成功了");
+        console.log("post复杂请求成功了");
+      });
+    }
+
+    function fetchStream() {
+      // 创建一个异步迭代器，这里通过生成器实现
+      let asyncIter = (function* asyncMaker() {
+        for (let i = 0; i < 5; i++)
+          yield new Promise(res => setTimeout(res.bind(globalThis, i), 1000))
+      })();
+
+      // 创建一个可读流，封装底层数据
+      let stream = new ReadableStream({
+        async start(control) {
+          // 遍历异步迭代器，把数据装入可读流
+          for await (let value of asyncIter)
+            control.enqueue(value)
+          // 写入数据后可读流关闭
+          control.close()
+        }
+      });
+      fetch('http://localhost:7001/api/test/post', {
+        method: "post",
+        body: stream
+      }).then((data) => {
+        console.log("post流请求成功了");
       });
     }
 

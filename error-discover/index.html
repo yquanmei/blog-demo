@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<button onclick="errorHandle()">window.onerror同步</button>
+<button onclick="errorHandle2()">window.onerror异步</button>
+<!-- <img src="http://closertb.site/asd.png" /> -->
+<button onclick="errorHandle3()">unhandledrejection</button>
+<button onclick="errorHandle4()">unhandledrejection, fetch</button>
+
+<body>
+  <script>
+    /*方式：window.onerror*/
+    window.onerror = (message, source, lineno, colno, error) => {
+      console.group('window.onerror捕获到异常：')
+      console.log('error message:', message);
+      console.log('position', lineno, colno);
+      console.log('错误捕获：', error);
+      console.groupEnd()
+      return true; // 异常不继续冒泡，浏览器默认打印机制就会取消
+    }
+    function errorHandle() {
+      const a = 0x01;
+      // a s是number, 不是string；
+      const b = a.startWith('0x');
+    }
+
+    function errorHandle2() {
+      setTimeout(() => {
+        const a = 0x01;
+        // a s是number, 不是string；
+        const b = a.startWith('0x');
+        // undefined.map(v => v);
+      });
+    }
+
+    const img = new Image();
+    img.onload = () => {
+      console.log('finish');
+    };
+    img.src = 'https://closertb.site/abc.jpg'; // 触发错误
+    // document.body.appendChild(img);
+    /*方式：window.addEventListener()*/
+    // 仅处理资源加载错误
+    window.addEventListener('error', (event) => {
+      let target = event.target || event.srcElement;
+      let isElementTarget = target instanceof HTMLScriptElement || target instanceof HTMLLinkElement || target instanceof HTMLImageElement;
+      // console.log('isEl', isElementTarget);
+      if (!isElementTarget) return false;
+      const url = target.src || target.href;
+      // 上报资源地址
+      console.group('window.addEventListener捕获到异常：')
+      console.log('资源加载位置', event.path);
+      console.log('静态资源错误捕获：', 'resource load exception:', url);
+      console.groupEnd()
+    }, true);// 关于这里为什么不可以用e.preventDefault()来阻止默认打印，是因为这个错误，我们是捕获阶段获取到的，而不是冒泡；
+    // }); // 如果没有true,捕获不到
+
+    /* unhandledrejection*/
+    window.addEventListener('unhandledrejection', (e) => {
+      console.group('unhandledrejection捕获到异常:');
+      console.log('e:', e)
+      console.groupEnd();
+      e.preventDefault();
+    })
+
+    function errorHandle3() {
+      new Promise((resolve, reject) => {
+        reject('http://localhost:3000/api/test/get')
+      }).then((data) => {
+        console.log('success');
+      })
+    }
+    function errorHandle4() {
+      fetch('http://localhost:7001/api/test/post1', {
+        method: 'POST',
+      }).then((data) => {
+        console.log('success:使用了fetch')
+      })
+    }
+
+    /*origin fetch*/
+    const originFetch = window.fetch;
+
+    window.fetch = (...args) => {
+      return originFetch.apply(this, args).then(res => {
+        // 没有res.ok状态，那catch仅能捕获到网络的错误, 请求错误就捕获不到；
+        if (!res.ok) {
+          throw new Error('request faild');
+        }
+        return res;
+      }).catch((error) => {
+        console.log('request错误捕获：', error, { ...args, message: 'request faild' }); // 上报错误
+        return {
+          message: 'request faild, this can to data'
+        }
+      });
+    }
+    fetch('http://localhost:7001/api/test/post1', {
+      method: 'POST'
+    }).then(data => {
+      console.log('success:', data)
+    })
+  </script>
+</body>
+
+
+</html>
