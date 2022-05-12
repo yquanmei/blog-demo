@@ -16,35 +16,60 @@
   <button onClick="xhrPost()">xhr, post(content-type)</button>
   <button onClick="fetchPost()">fetch, post(content-type)</button>
   <hr>
+  <h4>xhr注册监听器：</h4>
+  <button onClick="xhrBindEventHandeler()">xhr监听</button>
+  <hr>
   <h4>this is ReadableStream:</h4>
   <button onClick="fetchStream()">ReadableStream</button>
 </div>
 
 <body>
   <script>
-    function fetchGet() {
-      fetch('http://localhost:7001/api/test/get').then((data) => {
-        console.log("get简单请求成功了");
-      });
-    }
-    function xhrPost() {
-      let xmlhttp = new XMLHttpRequest();
-      xmlhttp.open('POST', 'http://localhost:7001/api/test/post', true);
-      xmlhttp.setRequestHeader('Content-Type', 'application/json');
-      xmlhttp.send();
-    }
+    // function fetchGet() {
+    //   fetch('http://localhost:7001/api/test/get').then((data) => {
+    //     console.log("get简单请求成功了");
+    //   });
+    // }
+  </script>
+  <script>
+    // function xhrPost() {
+    //   let xmlhttp = new XMLHttpRequest();
+    //   xmlhttp.open('POST', 'http://localhost:7001/api/test/post', true);
+    //   xmlhttp.setRequestHeader('Content-Type', 'application/json');
+    //   xmlhttp.send();
+    // }
 
-    function fetchPost() {
-      fetch('http://localhost:7001/api/test/post', {
-        method: "post",
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then((data) => {
-        console.log("post复杂请求成功了");
-      });
-    }
-
+    // function fetchPost() {
+    //   fetch('http://localhost:7001/api/test/post', {
+    //     method: "post",
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   }).then((data) => {
+    //     console.log("post复杂请求成功了");
+    //   });
+    // }
+  </script>
+  <script>
+    // function xhrBindEventHandeler() {
+    //   // 请求中的任意 XMLHttpRequest 对象均没有注册任何事件监听器；XMLHttpRequest 对象可以使用 XMLHttpRequest.upload 属性访问。
+    //   let xhr = new XMLHttpRequest();
+    //   xhr.open('POST', 'http://localhost:7001/api/test/post', true);
+    //   // xmlhttp.setRequestHeader('Content-Type', 'application/json');
+    //   xhr.send();
+    //   // console.log(xhr.upload)
+    //   // const uploadObj = xhr.upload;
+    //   xhr.onload = () => {
+    //     // uploadObj.onload = () => {
+    //     if (xhr.status != 200) { // 分析响应的 HTTP 状态
+    //       console.log(`Error ${xhr.status}: ${xhr.statusText}`); // 例如 404: Not Found
+    //     } else { // 显示结果
+    //       console.log(`Done, got ${xhr.response.length} bytes`); // response 是服务器响应
+    //     }
+    //   };
+    // }
+  </script>
+  <script>
     function fetchStream() {
       // 创建一个异步迭代器，这里通过生成器实现
       let asyncIter = (function* asyncMaker() {
@@ -69,8 +94,8 @@
         console.log("post流请求成功了");
       });
     }
-
   </script>
+
 </body>
 
 

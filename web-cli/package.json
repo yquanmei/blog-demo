@@ -1,0 +1,33 @@
+{
+  "name": "web-cli",
+  "version": "1.0.0",
+  "description": "cli from ichint",
+  "main": "index.js",
+  "bin": {
+    "web-cli": "bin/index.js"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yquanmei/web-cli.git"
+  },
+  "author": "yquanmei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yquanmei/web-cli/issues"
+  },
+  "homepage": "https://github.com/yquanmei/web-cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.2.0",
+    "cross-spawn": "^7.0.3",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^8.2.3",
+    "semver": "^7.3.7"
+  }
+}

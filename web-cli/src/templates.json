@@ -1,0 +1,14 @@
+{
+  "ichint-umi-pc": {
+    "url": "yquanmei/gridea-theme-asuncat",
+    "downloadUrl": "yquanmei/gridea-theme-asuncat",
+    "description": "blog主题",
+    "script": ""
+  },
+  "ichint-uni-app": {
+    "url": "templates/uniapp-project",
+    "downloadUrl": "templates/uniapp-project",
+    "description": "多端框架",
+    "script": ""
+  }
+}
