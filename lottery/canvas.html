@@ -10,7 +10,9 @@
 
 <body>
   <canvas id="canvaId" width="400" height="400"></canvas>
+
   <script>
+    /*canvas*/
     var myCanvas = document.getElementById('canvaId');
     const config = {
       n: 6, // 画6个扇形
@@ -48,6 +50,21 @@
         ctx.arc(arc.x, arc.y, arc.r, getRads(start), getRads(end), false);    // 闭合路径
         ctx.closePath();
         ctx.fill();
+        // let img = new Image();
+        // img.src = './img/bg.jpg';
+        // img.onload = () => { // 划重点---图片加载完后执行
+        //   img.width = 400;
+        //   img.height = 400;
+        //   /**
+        //    *  drawImage()绘制图片，参数分别是:
+        //    * 1.图片, 
+        //    * 2.x起始点（这里用的是 画布宽度/2 - 图片的宽度/2）
+        //    * 3.y的起始点（这里用的是 画布高度/2 - 图片的高度/2）
+        //    * 4.图片的宽度
+        //    * 5.图片的高度
+        //    */
+        //   ctx.drawImage(img, cWidth / 2 - img.width / 2, cHeight / 2 - img.height / 2, img.width, img.height);
+        // }
 
         ctx.restore();
       }
@@ -55,7 +72,7 @@
     }
 
     const drawScreen = drawMain(myCanvas, config)
-    //画每段扇形
+    // 每个扇形的配置
     const n = config.n;
     for (let i = 0; i < n; i++) {
       startP = 360 / n * i
