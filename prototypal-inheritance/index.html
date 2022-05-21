@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    /*原型链继承*/
+    // // 实现原型链的一种基本模式
+    // function Person() {
+    //   this.name = name;
+    //   this.say = function () {
+    //     console.log('1 + 1 = 2');
+    //   }
+    // }
+    // Person.prototype.listen = function () {
+    //   console.log('hello world');
+    // }
+
+    // function Student() {
+
+    // }
+
+    // console.log('Student.prototype.constructor:', Student.prototype.constructor);
+
+    // // 继承，用SuperType类型的一个实例来重写SubType类型的原型对象
+    // Student.prototype = new Person(); // 关键
+    // const stu = new Student();
+    // stu.grade = 3;
+
+    // console.log(stu.grade); // 3
+    // stu.say(); // 1 + 1 = 2
+    // stu.listen() // hello world
+
+    // // console.log(stu instanceof Student) // true
+    // // console.log(stu instanceof Person) // true
+
+    // Student.prototype.constructor = Student
+
+    // console.log('Student.prototype.constructor，重写子类原型对象后:', Student.prototype.constructor)
+  </script>
+  <script>
+    /*构造函数继承*/
+    // function Person() {
+    //   this.name = name;
+    //   this.say = function () {
+    //     console.log('1 + 1 = 2');
+    //   }
+    // }
+    // Person.prototype.listen = function () {
+    //   console.log('hello world');
+    // }
+    // function WebsiteMaster(site) {
+    //   this.site = site
+    // }
+
+    // function Student(name, grade, site) {
+    //   Person.call(this, name); // 继承Person，在这里还可以给超类型构造函数传参
+    //   WebsiteMaster.call(this, site)
+    //   this.grade = grade
+    // }
+
+    // const stu = new Student('asuncat', 3, 'https://yquanmei.github.io');
+    // console.log(stu.name, stu.grade, stu.site); // asuncat, 3, 'https://yquanmei.github.io'
+
+    // stu.say(); // 1 + 1 = 2
+    // stu.listen() // Uncaught TypeError: stu.listen is not a function
+
+  </script>
+  <script>
+    /*组合式继承*/
+    // function Person(name) {
+    //   this.name = name;
+    //   this.say = function () {
+    //     console.log('1 + 1 = 2');
+    //   }
+    // }
+    // Person.prototype.listen = function () {
+    //   return this.property
+    // }
+
+    // function WebsiteMaster(site) {
+    //   this.site = site;
+    // }
+
+    // function Student(name, grade, site) {
+    //   Person.call(this, name); // 继承属性
+    //   WebsiteMaster.call(this, site);
+    //   this.grade = grade
+    // }
+
+    // Student.prototype = new Person() // 继承方法
+    // Student.prototype.constructor = Student
+
+    // const stu = new Student('asuncat', 3, 'https://yquanmei.github.io')
+
+    // console.log(stu.name, stu.grade, stu.site); // asuncat, 3, https://yquanmei.github.io
+
+    // stu.say(); // 1 + 1 = 2
+    // stu.listen(); // hello world
+
+    // console.log(stu.constructor);
+
+  </script>
+  <script>
+    /*原型式继承*/
+    // function Person(name) {
+    //   this.name = name;
+    //   this.say = function () {
+    //     console.log('1 + 1 = 2');
+    //   }
+    // }
+    // Person.prototype.listen = function () {
+    //   return this.property
+    // }
+
+    // function object(o) {
+    //   function F() { }
+    //   F.prototype = o;
+    //   return new F();
+    // }
+
+    // const person = new Person('asuncat');
+
+    // const stu = object(person);
+
+    // stu.grade = 3;
+    // stu.study = function () {
+    //   console.log('FrontEnd');
+    // }
+
+    // console.log(stu.name, stu.grade); // asuncat, 3
+
+    // stu.say(); // 1 + 1 = 2
+    // stu.listen(); // hello world
+
+    // stu.study() // FrontEnd
+  </script>
+  <script>
+    /*原型式继承：Object.create()*/
+    // var person = {
+    //   name: 'asuncat',
+    //   colors: ['red', 'green', 'blue']
+    // }
+
+    // var anotherPerson1 = Object.create(person, {
+    //   name: {
+    //     value: 'tom'
+    //   }
+    // })
+
+    // var anotherPerson2 = Object.create(person, {
+    //   name: {
+    //     value: 'jerry'
+    //   }
+    // })
+
+    // anotherPerson1.colors.push('purple');
+
+    // console.log(anotherPerson1.name); // tom
+    // console.log(anotherPerson2.name); // jerry
+    // console.log(anotherPerson1.colors); // 'red,green,blue,purple'
+    // console.log(anotherPerson2.colors); // 'red,green,blue,purple'
+  </script>
+  <script>
+    /*寄生式继承*/
+    // function Person(name) {
+    //   this.name = name;
+    //   this.say = function () {
+    //     console.log('1 + 1 = 2');
+    //   }
+    // }
+    // Person.prototype.listen = function () {
+    //   return this.property
+    // }
+    // function object(o) {
+    //   function F() { }
+    //   F.prototype = o;
+    //   return new F();
+    // }
+
+    // function Student(name, grade) {
+    //   const person = object(new Person(name));
+
+    //   person.grade = grade
+    //   person.study = function () {
+    //     console.log('FrontEnd');
+    //   }
+
+    //   return person;
+    // }
+
+    // const stu = new Student('asuncat', 3)
+
+    // console.log(stu.name, stu.grade); // asuncat, 3
+    // stu.say(); // 1 + 1 = 2
+    // stu.listen(); // hello world
+
+    // stu.study(); // FrontEnd
+  </script>
+  <script>
+    /*寄生组合式继承*/
+    // function Person(name) {
+    //   this.name = name;
+    //   this.say = function () {
+    //     console.log('1 + 1 = 2');
+    //   }
+    // }
+    // Person.prototype.listen = function () {
+    //   return this.property
+    // }
+
+    // function WebsiteMaster(site) {
+    //   this.site = site
+    // }
+
+    // function Student(name, grade, site) {
+    //   Person.call(this, name); // 继承属性
+    //   WebsiteMaster.call(this, site);
+    //   this.grade = grade;
+    // }
+
+    // Student.prototype = Object.create(Person.prototype); // 继承方法
+    // Student.prototype.constructor = Student; // 修复构造函数指向
+
+    // const stu = new Student('asuncat', 3, 'https://yquanmei.github.io');
+
+    // console.log(stu.name, stu.grade, stu.site); // asuncat, 3, https://yquanmei.github.io
+
+    // stu.say(); // 1 + 1 = 2
+
+    // stu.listen(); // hello world
+  </script>
+  <script>
+    /*寄生式组合：引用关系*/
+    function Person(name) {
+      this.name = name;
+      this.say = function () {
+        console.log('1 + 1 = 2');
+      }
+    }
+    Person.prototype.listen = function () {
+      return this.property
+    }
+    function WebsiteMaster(site) {
+      this.site = site
+    }
+
+    function Student(name, grade, site) {
+      Person.call(this, name)			// 继承属性
+      WebsiteMaster.call(this, site)
+      this.grade = grade
+    }
+
+    Student.prototype = Person.prototype		// 继承方法
+    Student.prototype.constructor = Student   // 修复实例
+
+    const stu = new Student('clz', 3, 'https://clz.vercel.app')
+
+    console.log(stu.name, stu.grade, stu.site)  // clz, 3, https://clz.vercel.app
+
+    stu.say()   // 1 + 1 = 2
+    stu.listen()    // エウテルペ
+
+
+    Student.prototype.listen = function () {
+      console.log('EGOIST')
+    }
+
+    console.log(Person.prototype.listen)
+
+
+  </script>
+  <script>
+//     function Foo() {
+//       Foo.a = function () {
+//         console.log(1);
+//       }
+//       this.a = function () {
+//         console.log(2);
+//       }
+//     }
+//     Foo.prototype.a = function () {
+//       console.log(3);
+//     }
+//     Foo.a = function () {
+//       console.log(4);
+//     }
+
+//     Foo.a();
+
+//     let obj = new Foo();
+//     obj.a();
+
+//     Foo.a();
+
+// // 
+//     function Obj2() {
+
+//     }
+//     console.log(Foo)
+//     Obj2.prototype = new Foo();
+//     const test = new Obj2();
+//     console.log(test)
+//     test.a();
+  </script>
+  <script>
+
+  </script>
+
+</body>
+
+
+</html>
