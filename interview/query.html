@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    function myProto(data) {
+      this.where = function (predicate) {
+        const ans = data.filter(predicate)
+        this.data = [...ans];
+        return this;
+      }
+      this.orderBy = function (key, desc) {
+        let ans = this.data;
+        if (desc) {
+          ans = ans.sort((a, b) => a[key] - b[key])
+        } else {
+          ans = ans.sort((a, b) => b[key] - a[key])
+        }
+        this.data = ans;
+        return this;
+      }
+      this.groupBy = function (key) {
+        let ans = this.data
+        let group = ans.reduce((pre, item) => {
+          pre[item[key]] = [...(pre[item[key]] || []), item];
+          return pre;
+        }, {});
+
+        // group为以key为键的对象
+        // 可用Object.valus()转换为数组
+        this.data = Object.values(group)
+        return this;
+      }
+      this.execute = function () {
+        return this.data;
+      }
+    }
+    function query(data) {
+      return new myProto(data);
+    }
+
+    const data = [
+      { name: 'foo', age: 16, city: 'shanghai' },
+      { name: 'bar', age: 24, city: 'hangzhou' },
+      { name: 'fiz', age: 22, city: 'shanghai' },
+      { name: 'baz', age: 19, city: 'hangzhou' }
+    ];
+
+    let result = query(data)
+      .where(item => item.age > 18)
+      .orderBy('age')
+      .groupBy('city')
+      .execute();
+
+    console.log(result)
+
+    /* 结果返回
+        [
+        [
+          { name: 'baz', age: 19, city: 'hangzhou' },
+          { name: 'bar', age: 24, city: 'hangzhou' },
+        ],
+        [
+          { name: 'fiz', age: 22, city: 'shanghai' },
+        ]
+        ]
+        */
+
+
+
+  </script>
+</body>
+
+</html>

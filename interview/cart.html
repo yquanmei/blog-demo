@@ -7,7 +7,7 @@
   <title>Document</title>
   <script crossorigin src="https://unpkg.com/react@16.8.4/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16.8.4/umd/react-dom.development.js"></script>
-<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+<script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 </head>
 <body>
   <style>
@@ -107,7 +107,7 @@
     }, [seconds]);
 
     useEffect(() => {
-      timeChange.current = setInterval(() => setSeconds(t => --t), 1000);
+      timeChange.current = setInterval(() => setSeconds(t => --t), 1000);  // 要用setInterval，不能用setTimeout，因为setInterval是内部调度程序每隔一定时间执行一次func，但是setTimeout的下一次调用是在前一次调用完成时再调度的
       return () => clearInterval(timeChange.current);
     }, [])
 
@@ -125,7 +125,7 @@
   const CardList: React.FC<{ list: IDirectVoucher[] }> = (props) => {
     return (
       <React.Fragment>
-        {cardDataList.map((data, index) => (
+        {props.list.map((data, index) => (
           <CardReact key={index} data={data} />
         ))}
       </React.Fragment>
@@ -134,8 +134,7 @@
 
   // const root = ReactDOM.createRoot(document.getElementById('app-react'));
   // root.render(<CardList list={cardDataList} />);
-    ReactDOM.render(<CardList />, document.getElementById('app-react'));
-  </script>
-  
+    ReactDOM.render(<CardList list={cardDataList} />, document.getElementById('app-react'));
+  </script> 
 </body>
 </html>
