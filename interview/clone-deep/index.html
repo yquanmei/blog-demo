@@ -1,0 +1,268 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-05
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-05
+ * @FilePath: /blog-demo/interview/clone-deep/index.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  function test() {
+    console.log('这是测试dom的函数')
+  }
+</script>
+
+<body>
+  <!-- <div id="dom11">dom11</div> -->
+  <!-- <span id="dom11">dom11</div> -->
+  <span id="dom11" onClick="test">a</span>
+
+  <script>
+    /**
+    * 深度优先搜索
+    */
+    // const symbolTag = '[object Symbol]'
+    // const objectTag = '[object Object]'
+    // const functionTag = '[object Object]'
+    // const errorTag = '[object Error]'
+    // const arrayTag = '[object Array]'
+    const mapTag = '[object Map]'
+    const weakMapTag = '[object WeakMap]'
+    const setTag = '[object Set]'
+    // const mathTag = '[object Math]'
+    // const dateTag = '[object Date]'
+    // const regexpTag = '[object RegExp]'
+    // const arrayBufferTag = '[object ArrayBuffer]'
+
+    /**
+     * @description: 判断是否是对象
+     * @param {*} value
+     * @return {*}
+     */
+    function isObject(value) {
+      const type = typeof value;
+      return value != null && type === 'object'
+    }
+    /**
+     * @description: 根据属性值的不同类型，分别处理后返回
+     * @param {*} value 被拷贝的属性值
+     * @param {*} tag 值的类型
+     * @param {*} hash 记录，处理循环引用
+     * @return {*}
+     */
+    function initByTag(value, tag, hash) {
+      if (value instanceof HTMLElement) {
+        let domResult = value.cloneNode(true); // true：复制子节点
+        return domResult;
+      }
+      const Ctor = value.constructor
+      switch (tag) {
+        case mapTag:
+          let mapResult = new Ctor
+          value.forEach((subValue, k) => {
+            mapResult.set(k, cloneDeep(subValue, hash))
+          })
+          return mapResult
+        case weakMapTag:
+          let weakMapResult = new Ctor
+          value.forEach((subValue, k) => {
+            weakMapResult.set(k, cloneDeep(subValue, hash))
+          })
+          return weakMapResult
+        case setTag:
+          let setResult = new Ctor
+          value.forEach((subValue, k) => {
+            setResult.add(k, cloneDeep(subValue, hash))
+          })
+          return setResult;
+        default:
+          let defaultResult = cloneDeep(value, hash)
+          return defaultResult
+      }
+    }
+
+
+    function cloneDeep(source, hash = new WeakMap()) {
+      if (!isObject(source)) return source;
+      if (hash.has(source)) return hash.get(source);
+
+      let target = Array.isArray(source) ? [] : {}
+      hash.set(source, target);
+
+      // 遍历的是es6之前的基础数据类型 + symbol类型，也可以用Object.keys() + Object.getOwnPropertySymbols
+      // 如果要拷贝原型链上的属性，需要用for...in + getOwnPropertySymbols
+      Reflect.ownKeys(source).forEach(key => { // 改动
+        const value = source[key]
+        let result // 新对象的属性值
+
+        const tag = Object.prototype.toString.call(value);
+
+        if (isObject(value)) {
+          result = initByTag(value, tag, hash);
+        } else {
+          result = value
+        }
+        target[key] = result;
+      })
+
+      return target;
+    }
+
+    var a = {
+      name: 'asuncat',
+      a1: undefined,
+      a2: null,
+      a3: 123,
+      testSymbol: Symbol('tes'),
+      book: {
+        title: 'web',
+        price: '22'
+      },
+      testFunc: function () {
+        console.log('that is a good idea')
+      },
+      testMap: new Map([['onion', 50]]),
+      testSet: new Set(['oranges', 'apple', 'bananas']),
+      testDate: Date.now(),
+      testReg: /\w/ig,
+      testDom: document.getElementById('dom11')
+      // dom11: document.getElementById('dom11')
+    }
+    var sym1 = Symbol("a"); // 创建新的symbol类型
+    var sym2 = Symbol.for("b"); // 从全局的symbol注册?表设置和取得symbol
+
+    a[sym1] = "localSymbol";
+    a[sym2] = "globalSymbol";
+
+    a.circleRef = a;
+
+    const b = cloneDeep(a);
+    b.book.title = '测试book.title'
+    b.testSymbol = Symbol('thisisb');
+    b.testReg = /\d/ig,
+      console.log(`%c b:::`, 'background-color: pink;font-size:14px;', b)
+    // console.log(`%c b.testReg:::`, 'background-color: pink;font-size:14px;', Object.prototype.toString.call(b.testReg))
+    console.log(`%c b.testSymbol:::`, 'background-color: pink;font-size:14px;', Object.prototype.toString.call(b.testSymbol))
+    console.log(a);
+    // console.log(b)
+  </script>
+  <!-- <script>
+
+    function isObject(value) {
+      const type = typeof value;
+      return value != null && type === 'object';
+    }
+    function cloneDeep5(source, hash = new WeakMap()) {
+      if (!isObject(source)) return source;
+      // if (hash.has(source)) return hash.get(source);
+
+      const root = {}
+
+      // hash.set(source, target);
+
+      // 栈
+      const loopList = [
+        {
+          parent: root,
+          key: undefined,
+          data: source
+        }
+      ]
+      while (loopList.length) {
+        // console.log(`%c loopList.length:::`, 'background-color: pink;font-size:14px;', loopList.length)
+        // console.log(`%c loopList:::`, 'background-color: pink;font-size:14px;', loopList)
+
+        console.log(`%c root:::`, 'background-color: pink;font-size:14px;', root)
+        // 广度优先
+        const node = loopList.pop();
+        const parent = node.parent;
+        const key = node.key;
+        const data = node.data;
+        // console.log(`%c key:::`, 'background-color: pink;font-size:14px;', key)
+
+        // 初始化赋值目标，key为undefined则拷贝到父元素，否则拷贝到子元素
+        let res = parent;
+        if (typeof key !== 'undefined') {
+          // res = parent[key] = {}
+          parent[key] = {}
+          res = parent
+        }
+        // console.log(`%c res:::`, 'background-color: pink;font-size:14px;', res)
+
+        // console.log(`%c data:::`, 'background-color: pink;font-size:14px;', data)
+        Reflect.ownKeys(data).forEach(k => {
+          if (isObject(data[k])) {
+            // 下一次循环
+            loopList.push({
+              parent: res,
+              key: k,
+              data: data[k]
+            })
+          } else {
+            res[k] = data[k]
+          }
+        })
+
+        // for (let k in data) {
+        //   if (Object.prototype.hasOwnProperty.call(data, k)) {
+        //     console.log(`%c key:::`, 'background-color: pink;font-size:14px;', key)
+        //     console.log(`%c k:::`, 'background-color: pink;font-size:14px;', k)
+        //     // if (typeof data[key] === 'object') {
+        //     if (typeof data[k] === 'object') {
+        //       // 下一次循环
+        //       loopList.push({
+        //         parent: res,
+        //         key: k,
+        //         data: data[k],
+        //       })
+        //     } else {
+        //       res[k] = data[k]
+        //     }
+        //   }
+        // }
+      }
+      return root
+    }
+
+
+    var a = {
+      name: 'asuncat',
+      book: {
+        title: 'web',
+        price: '22'
+      },
+      a1: undefined,
+      a2: null,
+      a3: 123
+    }
+    var sym1 = Symbol("a"); // 创建新的symbol类型
+    var sym2 = Symbol.for("b"); // 从全局的symbol注册?表设置和取得symbol
+
+    a[sym1] = "localSymbol";
+    a[sym2] = "globalSymbol";
+
+    a.name = "高级前端进阶";
+    a.book.price = "55";
+
+    const b = cloneDeep5(a);
+    // console.log(`%c b:::`, 'background-color: pink;font-size:14px;', b)
+    // b.book.title = '测试book.title'
+    // console.log(a);
+
+    // console.log(b)
+
+  </script> -->
+
+</body>
+
+</html>
