@@ -40,8 +40,8 @@
     const weakMapTag = '[object WeakMap]'
     const setTag = '[object Set]'
     // const mathTag = '[object Math]'
-    // const dateTag = '[object Date]'
-    // const regexpTag = '[object RegExp]'
+    const dateTag = '[object Date]'
+    const regexpTag = '[object RegExp]'
     // const arrayBufferTag = '[object ArrayBuffer]'
 
     /**
@@ -51,8 +51,9 @@
      */
     function isObject(value) {
       const type = typeof value;
-      return value != null && type === 'object'
+      return value != null && type === 'object'; // 不包括function
     }
+
     /**
      * @description: 根据属性值的不同类型，分别处理后返回
      * @param {*} value 被拷贝的属性值
@@ -67,24 +68,33 @@
       }
       const Ctor = value.constructor
       switch (tag) {
-        case mapTag:
+        case mapTag: // 可遍历类型
           let mapResult = new Ctor
           value.forEach((subValue, k) => {
             mapResult.set(k, cloneDeep(subValue, hash))
           })
           return mapResult
-        case weakMapTag:
+        case weakMapTag: // 可遍历类型
           let weakMapResult = new Ctor
           value.forEach((subValue, k) => {
             weakMapResult.set(k, cloneDeep(subValue, hash))
           })
           return weakMapResult
-        case setTag:
+        case setTag: // 可遍历类型
           let setResult = new Ctor
           value.forEach((subValue, k) => {
             setResult.add(k, cloneDeep(subValue, hash))
           })
           return setResult;
+        case dateTag: // 不可遍历类型
+          let dateResult = new Ctor(+value)
+          return dateResult;
+        case regexpTag: // 不可遍历类型
+          const reFlags = /\w*$/;
+          // 此处不用flags的原因在于flags方法返回的修饰符是按照字母顺序排列的
+          const regResult = new Ctor(value.source, reFlags.exec(value))
+          regResult.lastIndex = value.lastIndex
+          return regResult;
         default:
           let defaultResult = cloneDeep(value, hash)
           return defaultResult
@@ -105,12 +115,11 @@
         const value = source[key]
         let result // 新对象的属性值
 
-        const tag = Object.prototype.toString.call(value);
-
         if (isObject(value)) {
+          const tag = Object.prototype.toString.call(value);
           result = initByTag(value, tag, hash);
         } else {
-          result = value
+          result = value // 如果是函数，直接赋值
         }
         target[key] = result;
       })
