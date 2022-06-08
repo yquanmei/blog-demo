@@ -79,6 +79,24 @@
       // export default arrayEach
 
   </script>
+  <script>
+    
+      const reFlags = /\w*$/
+
+/**
+ * Creates a clone of `regexp`.
+ *
+ * @private
+ * @param {Object} regexp The regexp to clone.
+ * @returns {Object} Returns the cloned regexp.
+ */
+function cloneRegExp(regexp) {
+  const result = new regexp.constructor(regexp.source, reFlags.exec(regexp))
+  result.lastIndex = regexp.lastIndex
+  return result
+}
+
+  </script>
   <script type="module" crossorigin="anonymous">
     // <script>
     import Stack from './Stack.js'
