@@ -39,6 +39,7 @@
     const mapTag = '[object Map]'
     const weakMapTag = '[object WeakMap]'
     const setTag = '[object Set]'
+    const weakSetTag = '[object WeakSet]'
     // const mathTag = '[object Math]'
     const dateTag = '[object Date]'
     const regexpTag = '[object RegExp]'
@@ -71,18 +72,14 @@
       const Ctor = value.constructor
       switch (tag) {
         case mapTag: // 可遍历类型
+        case weakMapTag: // 可遍历类型
           let mapResult = new Ctor
           value.forEach((subValue, k) => {
             mapResult.set(k, cloneDeep(subValue, hash))
           })
           return mapResult
-        case weakMapTag: // 可遍历类型
-          let weakMapResult = new Ctor
-          value.forEach((subValue, k) => {
-            weakMapResult.set(k, cloneDeep(subValue, hash))
-          })
-          return weakMapResult
         case setTag: // 可遍历类型
+        case weakSetTag: // 可遍历类型：
           let setResult = new Ctor
           value.forEach((subValue, k) => {
             setResult.add(k, cloneDeep(subValue, hash))
@@ -95,7 +92,7 @@
           const reFlags = /\w*$/;
           // 此处不用flags的原因在于flags方法返回的修饰符是按照字母顺序排列的
           const regResult = new Ctor(value.source, reFlags.exec(value))
-          regResult.lastIndex = value.lastIndex
+          regResult.lastIndex = value.lastIndex;
           return regResult;
         default:
           let defaultResult = cloneDeep(value, hash)
