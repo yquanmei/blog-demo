@@ -1,40 +1,119 @@
-/*
- * @Author: yquanmei
- * @Date: 2022-07
- * @LastEditors: yquanmei
- * @LastEditTime: 2022-07
- * @FilePath: /learn-demo/babel-plugins/ui-import/es/index.js
- * @Description:
- * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
- */
-import Plugin from "./plugin";
-export default ({ types }) => {
+import assert from 'assert';
+import Plugin from './Plugin';
+
+export default function ({ types }) {
   let plugins = null;
-  const applyInstance = (method, args, context) => {
+
+  // Only for test
+  // eslint-disable-next-line no-underscore-dangle
+  global.__clearBabelAntdPlugin = () => {
+    plugins = null;
+  };
+
+  function applyInstance(method, args, context) {
+    // eslint-disable-next-line no-restricted-syntax
     for (const plugin of plugins) {
       if (plugin[method]) {
         plugin[method].apply(plugin, [...args, context]);
       }
     }
-  };
+  }
+
   const Program = {
     enter(path, { opts = {} }) {
-      // 初始化插件实例
+      // Init plugin instances once.
       if (!plugins) {
-        plugins = new Plugin(opts.libraryName, opts.stylePath, types);
+        if (Array.isArray(opts)) {
+          plugins = opts.map(
+            (
+              {
+                libraryName,
+                libraryDirectory,
+                style,
+                styleLibraryDirectory,
+                customStyleName,
+                camel2DashComponentName,
+                camel2UnderlineComponentName,
+                fileName,
+                customName,
+                transformToDefaultImport,
+              },
+              index,
+            ) => {
+              assert(libraryName, 'libraryName should be provided');
+              return new Plugin(
+                libraryName,
+                libraryDirectory,
+                style,
+                styleLibraryDirectory,
+                customStyleName,
+                camel2DashComponentName,
+                camel2UnderlineComponentName,
+                fileName,
+                customName,
+                transformToDefaultImport,
+                types,
+                index,
+              );
+            },
+          );
+        } else {
+          assert(opts.libraryName, 'libraryName should be provided');
+          plugins = [
+            new Plugin(
+              opts.libraryName,
+              opts.libraryDirectory,
+              opts.style,
+              opts.styleLibraryDirectory,
+              opts.customStyleName,
+              opts.camel2DashComponentName,
+              opts.camel2UnderlineComponentName,
+              opts.fileName,
+              opts.customName,
+              opts.transformToDefaultImport,
+              types,
+            ),
+          ];
+        }
       }
-      applyInstance("ProgramEnter", arguments, this);
+      applyInstance('ProgramEnter', arguments, this); // eslint-disable-line
     },
-    // exit出口
     exit() {
-      applyInstance("ProgramExit", arguments, this);
+      applyInstance('ProgramExit', arguments, this); // eslint-disable-line
     },
   };
-  const ret = { visitor: { Program } };
-  ["ImportDeclaration", "CallExpression"].forEach((method) => {
-    ret.visitor[method] = () => {
-      applyInstance(method, arguments, ret.visitor);
+
+  const methods = [
+    'ImportDeclaration',
+    'CallExpression',
+    'MemberExpression',
+    'Property',
+    'VariableDeclarator',
+    'ArrayExpression',
+    'LogicalExpression',
+    'ConditionalExpression',
+    'IfStatement',
+    'ExpressionStatement',
+    'ReturnStatement',
+    'ExportDefaultDeclaration',
+    'BinaryExpression',
+    'NewExpression',
+    'ClassDeclaration',
+    'SwitchStatement',
+    'SwitchCase',
+  ];
+
+  const ret = {
+    visitor: { Program },
+  };
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const method of methods) {
+    ret.visitor[method] = function () {
+      // eslint-disable-line
+      applyInstance(method, arguments, ret.visitor); // eslint-disable-line
     };
-  });
+  }
+
   return ret;
-};
+}

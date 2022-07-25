@@ -8,6 +8,7 @@
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
 const path = require("path");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -21,6 +22,8 @@ module.exports = {
     // library: {
     //   type: "module",
     // },
+    library: "uiImportGood",
+    libraryTarget: "commonjs2",
   },
   mode: "none", // mode设置为node的原因是方便我们观察产物
   module: {
@@ -36,7 +39,10 @@ module.exports = {
       },
     ],
   },
-  // experiments: {
-  //   outputModule: true,
+  // resolve: {
+  //   fallback: {
+  //     assert: require.resolve("assert/"),
+  //   },
   // },
+  plugins: [new NodePolyfillPlugin()],
 };

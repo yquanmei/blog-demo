@@ -29,20 +29,49 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
-            // plugins: [
-            //   path.resolve(__dirname, "./lib/index.js"),
-            //   {
-            //     libraryName: "@ichint/ichintui",
-            //     // styleTargetDirectory: ''
-            //   },
-            // ],
+            plugins: [
+              [
+                path.resolve(__dirname, "./lib/index.js"),
+                {
+                  libraryName: "@ichint/ichintui",
+                  libraryDirectory: "src/components",
+                  style: (name, file) => {
+                    const realName = name.split("/").pop();
+                    // console.log(
+                    //   `%c realName:::`,
+                    //   "background-color: pink;font-size:14px;",
+                    //   realName
+                    // );
+                    return `antd/es/${realName}/style`;
+                    // // name::: @ichint/ichintui/src/components/menu
+                  },
+                },
+              ],
+            ],
           },
         },
+      },
+      {
+        test: /\.(css|less)$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "postcss-loader",
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
+        include: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".less"],
   },
   // experiments: {
   //   outputModule: true,
