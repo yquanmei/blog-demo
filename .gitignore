@@ -2,8 +2,8 @@
 
 # dependencies
 /node_modules
-/babel-plugins/node_modules
-/babel-plugins/dist
+/babel-plugins/*/node_modules
+/babel-plugins/*/dist
 /.pnp
 .pnp.js
 
