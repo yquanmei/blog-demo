@@ -42,4 +42,4 @@ yarn-error.log*
 /simple-request/egg-example/.github
 /simple-request/egg-example/.gitignore
 
-
+.vscode
