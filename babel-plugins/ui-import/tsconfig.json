@@ -1,0 +1,11 @@
+{
+      "compileOnSave": true,
+      "compilerOptions": {
+        "module": "amd",
+        "noImplicitAny": false,
+        "removeComments": false,
+        "preserveConstEnums": true,
+        "strictNullChecks": true,
+        "sourceMap": false
+      }
+}

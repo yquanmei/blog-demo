@@ -132,7 +132,11 @@ function _default({ types }) {
               },
               index
             ) => {
-              (0, _assert.default)(
+              console.log(
+                `%c libraryName:::`,
+                "background-color: pink;font-size:14px;",
+                libraryName
+              )(0, _assert.default)(
                 libraryName,
                 "libraryName should be provided"
               );
