@@ -3,6 +3,7 @@ import Plugin from "./Plugin";
 
 export default function ({ types }) {
   let plugins = null;
+  const libraryName = '@ichint/ichint-ui'
   // 将插件作用到节点上
   function applyInstance(method, args, context) {
     for (const plugin of plugins) {
@@ -16,7 +17,10 @@ export default function ({ types }) {
     enter(path, { opts = {} }) {
       // 初始化插件实例
       if (!plugins) {
-        plugins = [new Plugin()];
+        plugins = [new Plugin({
+          libraryName,
+          types
+        })];
       }
       applyInstance("ProgramEnter", arguments, this);
     },
