@@ -3,7 +3,7 @@
  * @Date: 2022-07
  * @LastEditors: yquanmei
  * @LastEditTime: 2022-07
- * @FilePath: /test-babel-plugins/scripts/build.js
+ * @FilePath: /learn-demo/babel-plugins/ui-import/scripts/build.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
@@ -16,7 +16,8 @@ const obj = babel.transformFileSync(file, {
   presets: ["@babel/preset-env", "@babel/preset-react"],
   plugins: [
     [
-      path.resolve(__dirname, "../plugin/lib/index.js"),
+      // path.resolve(__dirname, "../plugin/lib/index.js"),
+      path.resolve(__dirname, "../lib/index.js"),
       // path.resolve(__dirname, "../plugin/es/index.js"),
       // "./plugin/lib/index.js",
       // "./plugin/es/index.js",

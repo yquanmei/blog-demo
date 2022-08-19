@@ -2,7 +2,7 @@
  * @Author: yquanmei
  * @Date: 2022-07
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-07
+ * @LastEditTime: 2022-08
  * @FilePath: /learn-demo/babel-plugins/ui-import/README.md
  * @Description: 
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
@@ -74,3 +74,12 @@ vscode点debug按钮启动
   ]
 }
 ```
+
+# 运行命令
+`npm run build`：启动项目（以引入插件的方式启动项目）
+`npm run build:plugin`: 打包插件
+
+# 项目使用流程
+- es 文件夹下编写插件
+- `npm run build:plugin:gulp`  // 打包插件
+- `npm run build`  // 启动项目

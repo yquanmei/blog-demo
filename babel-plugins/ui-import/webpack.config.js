@@ -2,8 +2,8 @@
  * @Author: yquanmei
  * @Date: 2022-07
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-07
- * @FilePath: /test-babel-plugins/webpack.config.js
+ * @LastEditTime: 2022-08
+ * @FilePath: /learn-demo/babel-plugins/ui-import/webpack.config.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
@@ -32,8 +32,10 @@ module.exports = {
             plugins: [
               [
                 // path.resolve(__dirname, "./lib/index.js"),
-                "./plugin/lib/index.js",
+                // "./plugin/lib/index.js",
                 // "./plugin/es/index.js",
+                "./plugin/lib-webpack/index.js",
+                // "./plugin/lib-gulp/index.js",
                 {
                   libraryName: "@ichint/ichintui",
                   libraryDirectory: "src/components",
