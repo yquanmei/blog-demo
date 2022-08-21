@@ -5,80 +5,66 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _assert = _interopRequireDefault(require("assert"));
-
 var _Plugin = _interopRequireDefault(require("./Plugin"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// 作用到ast
 function _default({
   types
 }) {
-  let plugins = null; // Only for test
-  // eslint-disable-next-line no-underscore-dangle
+  let plugins = null; // let plugin = null;
 
-  global.__clearBabelAntdPlugin = () => {
-    plugins = null;
-  };
+  const libraryName = "@ichint/ichintui"; // 将插件作用到节点上
 
   function applyInstance(method, args, context) {
-    // eslint-disable-next-line no-restricted-syntax
     for (const plugin of plugins) {
+      // 执行的src/index.js，共5个method
+      //  ProgramEnter
+      // ImportDeclaration，对应 import React from "react";
+      // ImportDeclaration，对应 import { createRoot } from "react-dom/client";
+      // ImportDeclaration，对应 import { Button } from "@ichint/ichintui";
+      // ProgramExit
       if (plugin[method]) {
+        // ./Plugin.js中得有对应的ProgramEnter, ImportDeclaration, ProgramExit方法
         plugin[method].apply(plugin, [...args, context]);
       }
     }
   }
 
   const Program = {
+    // ast入口
     enter(path, {
       opts = {}
     }) {
-      // Init plugin instances once.
+      // 初始化插件实例
       if (!plugins) {
-        if (Array.isArray(opts)) {
-          plugins = opts.map(({
-            libraryName,
-            libraryDirectory,
-            style,
-            styleLibraryDirectory,
-            customStyleName,
-            camel2DashComponentName,
-            camel2UnderlineComponentName,
-            fileName,
-            customName,
-            transformToDefaultImport
-          }, index) => {
-            (0, _assert.default)(libraryName, "libraryName should be provided");
-            return new _Plugin.default(libraryName, libraryDirectory, style, styleLibraryDirectory, customStyleName, camel2DashComponentName, camel2UnderlineComponentName, fileName, customName, transformToDefaultImport, types, index);
-          });
-        } else {
-          (0, _assert.default)(opts.libraryName, "libraryName should be provided");
-          plugins = [new _Plugin.default(opts.libraryName, opts.libraryDirectory, opts.style, opts.styleLibraryDirectory, opts.customStyleName, opts.camel2DashComponentName, opts.camel2UnderlineComponentName, opts.fileName, opts.customName, opts.transformToDefaultImport, types)];
-        }
+        plugins = [new _Plugin.default({
+          libraryName,
+          types
+        })];
       }
 
-      applyInstance("ProgramEnter", arguments, this); // eslint-disable-line
+      applyInstance("ProgramEnter", arguments, this); // this：PluginClass
     },
 
+    // ast出口
     exit() {
-      applyInstance("ProgramExit", arguments, this); // eslint-disable-line
+      applyInstance("ProgramExit", arguments, this);
     }
 
   };
-  const methods = ["ImportDeclaration", "CallExpression", "MemberExpression", "Property", "VariableDeclarator", "ArrayExpression", "LogicalExpression", "ConditionalExpression", "IfStatement", "ExpressionStatement", "ReturnStatement", "ExportDefaultDeclaration", "BinaryExpression", "NewExpression", "ClassDeclaration", "SwitchStatement", "SwitchCase"];
   const ret = {
     visitor: {
       Program
     }
-  }; // eslint-disable-next-line no-restricted-syntax
+  }; // 插件只作用在上
 
-  for (const method of methods) {
+  const methods = ["ImportDeclaration", "CallExpression", "Property", "MemberExpression"];
+  methods.forEach(method => {
     ret.visitor[method] = function () {
-      // eslint-disable-line
-      applyInstance(method, arguments, ret.visitor); // eslint-disable-line
+      applyInstance(method, arguments, ret.visitor);
     };
-  }
-
+  });
   return ret;
 }

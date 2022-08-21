@@ -109,6 +109,7 @@ export default function ({ types }) {
 
   // eslint-disable-next-line no-restricted-syntax
   for (const method of methods) {
+
     ret.visitor[method] = function () {
       // eslint-disable-line
       applyInstance(method, arguments, ret.visitor); // eslint-disable-line

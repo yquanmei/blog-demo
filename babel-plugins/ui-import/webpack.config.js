@@ -34,22 +34,22 @@ module.exports = {
                 // path.resolve(__dirname, "./lib/index.js"),
                 // "./plugin/lib/index.js",
                 // "./plugin/es/index.js",
-                "./plugin/lib-webpack/index.js",
-                // "./plugin/lib-gulp/index.js",
-                {
-                  libraryName: "@ichint/ichintui",
-                  libraryDirectory: "src/components",
-                  style: (name, file) => {
-                    const realName = name.split("/").pop();
-                    // console.log(
-                    //   `%c realName:::`,
-                    //   "background-color: pink;font-size:14px;",
-                    //   realName
-                    // );
-                    return `antd/es/${realName}/style`;
-                    // // name::: @ichint/ichintui/src/components/menu
-                  },
-                },
+                // "./plugin/lib-webpack/index.js",
+                "./plugin/lib-gulp/index.js",
+                // {
+                //   libraryName: "@ichint/ichintui",
+                //   libraryDirectory: "src/components",
+                //   style: (name, file) => {
+                //     const realName = name.split("/").pop();
+                //     // console.log(
+                //     //   `%c realName:::`,
+                //     //   "background-color: pink;font-size:14px;",
+                //     //   realName
+                //     // );
+                //     return `antd/es/${realName}/style`;
+                //     // // name::: @ichint/ichintui/src/components/menu
+                //   },
+                // },
               ],
             ],
           },

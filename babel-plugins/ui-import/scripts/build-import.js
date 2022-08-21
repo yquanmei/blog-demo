@@ -44,13 +44,15 @@ const obj = babel.transformFileSync(file, {
   presets: ["@babel/preset-env", "@babel/preset-react"],
   plugins: [
     [
-      path.resolve(__dirname, "../plugin/lib-gulp/index.js"),
-      // path.resolve(__dirname, "../plugin/lib-babel-plugin-import/index.js"),
-      // {
-      //   libraryName: "@ichint/ichintui",
-      //   libraryDirectory: "src/components",
-      //   style: true,
-      // },
+      // path.resolve(__dirname, "../lib/index.js"),
+      // path.resolve(__dirname, "../plugin/lib-gulp/index.js"),
+      path.resolve(__dirname, "../plugin/lib-babel-plugin-import/index.js"),
+      {
+        libraryName: "@ichint/ichintui",
+        libraryDirectory: "src/components",
+        style: true,
+      },
+
       // {
       //   libraryName: "@ichint/ichintui",
       //   libraryDirectory: "src/components",
