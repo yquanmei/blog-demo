@@ -81,6 +81,8 @@ vscode点debug按钮启动
 
 # 项目使用流程
 - es 文件夹下编写插件
-- `npm run build:plugin:gulp`  // 打包插件
-- `npm i`
+- `npm i` // 安装插件依赖
+- `npm run build:plugin:gulp`  // gulp打包插件，es6 => commonjs
+- `node scripts/build.js` // 测试插件
+- `npm i` // 安装项目依赖
 - `npm run build`  // 启动项目
