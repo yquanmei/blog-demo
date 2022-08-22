@@ -30,7 +30,8 @@
     "postcss-loader": "^7.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
     "webpack-cli": "^4.10.0",

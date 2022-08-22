@@ -8,4 +8,8 @@ import ReactDOM from "react-dom/client";
 const appEl = document.getElementById("root");
 const root = ReactDOM.createRoot(appEl);
 
-root.render(<Button icon={<DownloadOutlined />}>按钮</Button>);
+root.render(
+  <Button type="primary" icon={<DownloadOutlined />}>
+    按钮
+  </Button>
+);

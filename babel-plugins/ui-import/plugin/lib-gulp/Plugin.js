@@ -57,7 +57,6 @@ class Plugin {
 
 
   _importMethod(methodName, file, pluginState, objectType) {
-    console.log(`%c methodName:::`, "background-color: pink;font-size:14px;", methodName);
     const excludedMethodNames = ["Icon"];
 
     if (!objectType && !pluginState.selectedmethods[methodName] && !excludedMethodNames.includes(methodName)) {
@@ -132,12 +131,20 @@ class Plugin {
 
 
     if (types.isIdentifier(node[prop]) && checkScope(node[prop])) {
-      console.log(`%c pluginState.specified[node[prop].name]:::`, "background-color: pink;font-size:14px;", pluginState.specified[node[prop].name]);
+      // console.log(
+      //   `%c pluginState.specified[node[prop].name]:::`,
+      //   "background-color: pink;font-size:14px;",
+      //   pluginState.specified[node[prop].name]
+      // );
       node[prop] = this._importMethod(pluginState.specified[node[prop].name], file, pluginState); // eslint-disable-line
     } else if (types.isSequenceExpression(node[prop])) {
       node[prop].expressions.forEach((expressionNode, index) => {
         if (types.isIdentifier(expressionNode) && checkScope(expressionNode)) {
-          console.log(`%c pluginState.specified[expressionNode.name]:::`, "background-color: pink;font-size:14px;", pluginState.specified[expressionNode.name]);
+          // console.log(
+          //   `%c pluginState.specified[expressionNode.name]:::`,
+          //   "background-color: pink;font-size:14px;",
+          //   pluginState.specified[expressionNode.name]
+          // );
           node[prop].expressions[index] = this._importMethod(pluginState.specified[expressionNode.name], file, pluginState); // eslint-disable-line
         }
       });
@@ -224,7 +231,6 @@ class Plugin {
 
     if (types.isIdentifier(node.callee)) {
       if (pluginState.specified[name]) {
-        console.log(`%c pluginState.specified[name]:::`, "background-color: pink;font-size:14px;", pluginState.specified[name]);
         node.callee = this._importMethod(pluginState.specified[name], file, pluginState);
       }
     } // 遍历 arguments 找我们要的 specifier
@@ -252,7 +258,7 @@ class Plugin {
 
 
     if (!node?.object || !node?.object?.name) return;
-    console.log(`%c pluginState:::`, "background-color: pink;font-size:14px;", pluginState);
+    console.log(`%c node:::`, "background-color: pink;font-size:14px;", node);
 
     if (pluginState?.libraryObjs?.[node.object.name]) {
       // antd.Button -> _Button
