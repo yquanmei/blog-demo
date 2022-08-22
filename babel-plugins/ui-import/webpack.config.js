@@ -29,29 +29,7 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
-            plugins: [
-              [
-                // path.resolve(__dirname, "./lib/index.js"),
-                // "./plugin/lib/index.js",
-                // "./plugin/es/index.js",
-                // "./plugin/lib-webpack/index.js",
-                "./plugin/lib-gulp/index.js",
-                // {
-                //   libraryName: "@ichint/ichintui",
-                //   libraryDirectory: "src/components",
-                //   style: (name, file) => {
-                //     const realName = name.split("/").pop();
-                //     // console.log(
-                //     //   `%c realName:::`,
-                //     //   "background-color: pink;font-size:14px;",
-                //     //   realName
-                //     // );
-                //     return `antd/es/${realName}/style`;
-                //     // // name::: @ichint/ichintui/src/components/menu
-                //   },
-                // },
-              ],
-            ],
+            plugins: [["./plugin/lib-gulp/index.js"]],
           },
         },
       },
@@ -86,9 +64,4 @@ module.exports = {
       clean: true,
     }),
   ],
-  mode: "development",
-  devtool: "inline-source-map",
-  devServer: {
-    hot: true,
-  },
 };

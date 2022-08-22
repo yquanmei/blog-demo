@@ -1,3 +1,5 @@
+// import { DatePicker } from "@ichint/ichintui";
+// ReactDOM.render(<DatePicker />);
 import { ConfigProvider, zhCN } from "@ichint/ichintui";
 
 // 创建app根节点
