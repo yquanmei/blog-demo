@@ -76,24 +76,14 @@ class Plugin {
           const transformdMethodNameForStyle = transCamel(methodName, "-");
           (0, _helperModuleImports.addSideEffect)(file.path, `antd/es/${transformdMethodNameForStyle}/style`);
           break;
-      } // if (!exclued.includes(methodName)) {
-      //   transformdMethodName = transCamelFirst(methodName);
-      //   const transformdMethodNameForStyle = transCamel(methodName, "-"); // 组件名转换规则。如，methodName,Button，转换成button
-      //   addSideEffect(
-      //     file.path,
-      //     `antd/es/${transformdMethodNameForStyle}/style`
-      //   );
-      // }
-
+      }
 
       const libraryDirectory = "src/components";
       const path = winPath((0, _path.join)(this.libraryName, libraryDirectory, transformdMethodName)); // import的组件的真实地址
 
       pluginState.selectedmethods[methodName] = (0, _helperModuleImports.addDefault)(file.path, path, {
         nameHint: methodName
-      });
-      return { ...pluginState.selectedmethods[methodName]
-      };
+      }); // return { ...pluginState.selectedmethods[methodName] };
     }
 
     if (objectType === "Icon") {
@@ -104,11 +94,12 @@ class Plugin {
 
       pluginState.selectedmethods[methodName] = (0, _helperModuleImports.addDefault)(file.path, path, {
         nameHint: methodName
-      }); // addSideEffect(file.path, `@ant-design/icons/${transformdMethodName}`);
-
-      return { ...pluginState.selectedmethods[methodName]
-      };
+      });
     }
+
+    console.log(`%c pluginState.selectedmethods:::`, "background-color: pink;font-size:14px;", pluginState.selectedmethods);
+    return { ...pluginState.selectedmethods[methodName]
+    };
   }
 
   _handleDeclarator(node, prop, path, state) {
@@ -131,20 +122,10 @@ class Plugin {
 
 
     if (types.isIdentifier(node[prop]) && checkScope(node[prop])) {
-      // console.log(
-      //   `%c pluginState.specified[node[prop].name]:::`,
-      //   "background-color: pink;font-size:14px;",
-      //   pluginState.specified[node[prop].name]
-      // );
       node[prop] = this._importMethod(pluginState.specified[node[prop].name], file, pluginState); // eslint-disable-line
     } else if (types.isSequenceExpression(node[prop])) {
       node[prop].expressions.forEach((expressionNode, index) => {
         if (types.isIdentifier(expressionNode) && checkScope(expressionNode)) {
-          // console.log(
-          //   `%c pluginState.specified[expressionNode.name]:::`,
-          //   "background-color: pink;font-size:14px;",
-          //   pluginState.specified[expressionNode.name]
-          // );
           node[prop].expressions[index] = this._importMethod(pluginState.specified[expressionNode.name], file, pluginState); // eslint-disable-line
         }
       });
@@ -226,11 +207,13 @@ class Plugin {
       types
     } = this; // 内部状态
 
-    const pluginState = this._getPluginState(state); // 如果方法调用者是 Identifier 类型
+    const pluginState = this._getPluginState(state); // console.log(`%c name:::`, "background-color: pink;font-size:14px;", name);
+    // 如果方法调用者是 Identifier 类型
 
 
     if (types.isIdentifier(node.callee)) {
       if (pluginState.specified[name]) {
+        console.log(`%c  CallExpression,node.callee:::`, "background-color: pink;font-size:14px;");
         node.callee = this._importMethod(pluginState.specified[name], file, pluginState);
       }
     } // 遍历 arguments 找我们要的 specifier
@@ -241,6 +224,7 @@ class Plugin {
 
       if (pluginState.specified[argName] && path.scope.hasBinding(argName) && path.scope.getBinding(argName).path.type === "ImportSpecifier") {
         // 找到 specifier，调用 importMethod 方法
+        console.log(`%c callExpression, node.arguments:::`, "background-color: pink;font-size:14px;", pluginState.specified[argName]);
         return this._importMethod(pluginState.specified[argName], // Button
         file, pluginState // PluginPass
         );
@@ -258,10 +242,10 @@ class Plugin {
 
 
     if (!node?.object || !node?.object?.name) return;
-    console.log(`%c node:::`, "background-color: pink;font-size:14px;", node);
 
     if (pluginState?.libraryObjs?.[node.object.name]) {
-      // antd.Button -> _Button
+      console.log(`%c MemberExpression, path.replaceWith:::`, "background-color: pink;font-size:14px;", node.property.name); // antd.Button -> _Button
+
       path.replaceWith(this._importMethod(node.property.name, file, pluginState, node.object.name));
     } else if (pluginState?.specified?.[node.object.name] && path?.scope?.hasBinding(node.object.name)) {
       const _path$scope$getBindin = path.scope.getBinding(node.object.name),
@@ -279,6 +263,7 @@ class Plugin {
         // Form.Item => 找到methodName: Form => _form["default"].Item
         // const {Item: FormItem} = Form; => 找到methodName: Form => 转换成var FormItem = _form["default"].Item;
         // const {DownloadOutlined} = Icon => 找到methodName: Icon => 转换成_icon["default"].DownloadOutlined
+        console.log(`%c MemberExpression, ndoe.object:::`, "background-color: pink;font-size:14px;", pluginState.specified[node.object.name]);
         node.object = this._importMethod(pluginState.specified[node.object.name], file, pluginState);
       }
     }

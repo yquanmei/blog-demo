@@ -14,7 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @Date: 2022-08
  * @LastEditors: yquanmei
  * @LastEditTime: 2022-08
- * @FilePath: /learn-demo/babel-plugins/ui-import/plugin/es/index.js
+ * @FilePath: /learn-demo/babel-plugins/ui-import/plugin/es-b2b/index.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
@@ -22,20 +22,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _default({
   types
 }) {
-  let plugins = null; // let plugin = null;
-
+  let plugins = null;
   const libraryName = "@ichint/ichintui"; // 将插件作用到节点上
 
   function applyInstance(method, args, context) {
     for (const plugin of plugins) {
-      // 执行的src/index.js，共5个method
-      //  ProgramEnter
-      // ImportDeclaration，对应 import React from "react";
-      // ImportDeclaration，对应 import { createRoot } from "react-dom/client";
-      // ImportDeclaration，对应 import { Button } from "@ichint/ichintui";
-      // ProgramExit
       if (plugin[method]) {
-        // ./Plugin.js中得有对应的ProgramEnter, ImportDeclaration, ProgramExit方法
         plugin[method].apply(plugin, [...args, context]);
       }
     }
@@ -54,7 +46,7 @@ function _default({
         })];
       }
 
-      applyInstance("ProgramEnter", arguments, this); // this：PluginClass
+      applyInstance("ProgramEnter", arguments, this);
     },
 
     // ast出口
@@ -67,7 +59,7 @@ function _default({
     visitor: {
       Program
     }
-  }; // 插件只作用在上
+  }; // 插件
 
   const methods = ["ImportDeclaration", "CallExpression", "Property", "MemberExpression"];
   methods.forEach(method => {

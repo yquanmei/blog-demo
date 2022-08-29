@@ -272,41 +272,41 @@ class Plugin {
     }
   }
 
-  // CallExpression(path, state) {
-  //   const node = path.node;
-  //   const file = (path && path.hub && path.hub.file) || (state && state.file);
-  //   const name = node.callee.name;
-  //   const types = this.types;
-  //   const pluginState = this.getPluginState(state);
+  CallExpression(path, state) {
+    const node = path.node;
+    const file = (path && path.hub && path.hub.file) || (state && state.file);
+    const name = node.callee.name;
+    const types = this.types;
+    const pluginState = this.getPluginState(state);
 
-  //   if (types.isIdentifier(node.callee)) {
-  //     if (pluginState.specified[name]) {
-  //       node.callee = this.importMethod(
-  //         pluginState.specified[name],
-  //         file,
-  //         pluginState
-  //       );
-  //     }
-  //   }
+    if (types.isIdentifier(node.callee)) {
+      if (pluginState.specified[name]) {
+        node.callee = this.importMethod(
+          pluginState.specified[name],
+          file,
+          pluginState
+        );
+      }
+    }
 
-  //   node.arguments = node.arguments.map((arg) => {
-  //     const argName = arg.name;
+    node.arguments = node.arguments.map((arg) => {
+      const argName = arg.name;
 
-  //     if (
-  //       pluginState.specified[argName] &&
-  //       path.scope.hasBinding(argName) &&
-  //       path.scope.getBinding(argName).path.type === "ImportSpecifier"
-  //     ) {
-  //       return this.importMethod(
-  //         pluginState.specified[argName],
-  //         file,
-  //         pluginState
-  //       );
-  //     }
+      if (
+        pluginState.specified[argName] &&
+        path.scope.hasBinding(argName) &&
+        path.scope.getBinding(argName).path.type === "ImportSpecifier"
+      ) {
+        return this.importMethod(
+          pluginState.specified[argName],
+          file,
+          pluginState
+        );
+      }
 
-  //     return arg;
-  //   });
-  // }
+      return arg;
+    });
+  }
 
   MemberExpression(path, state) {
     const node = path.node;
@@ -328,6 +328,11 @@ class Plugin {
         scope = _path$scope$getBindin.scope; // global variable in file scope
 
       if (scope.path.parent.type === "File") {
+        console.log(
+          `%c node.object.name:::`,
+          "background-color: pink;font-size:14px;",
+          node.object.name
+        );
         node.object = this.importMethod(
           pluginState.specified[node.object.name],
           file,

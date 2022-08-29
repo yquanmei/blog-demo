@@ -47,8 +47,9 @@ const obj = babel.transformFileSync(file, {
       path.resolve(__dirname, "../plugin/lib-gulp/index.js"),
       // path.resolve(__dirname, "../plugin/lib-babel-plugin-import/index.js"),
       // {
-      //   libraryName: "@ichint/ichintui",
-      //   libraryDirectory: "src/components",
+      //   // libraryName: "@ichint/ichintui",
+      //   libraryName: "antd",
+      //   // libraryDirectory: "src/components",
       //   style: true,
       // },
       // {
