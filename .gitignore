@@ -43,3 +43,6 @@ yarn-error.log*
 /simple-request/egg-example/.gitignore
 
 .vscode
+
+chrome-plugins/cdsn-copy-code.crx
+chrome-plugins/cdsn-copy-code.pem
