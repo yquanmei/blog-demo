@@ -1,0 +1,74 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-08
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-09
+ * @FilePath: /learn-demo/test/index.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">按钮</button>
+  <!-- <script>
+    function partition(arr, left, right) {
+      let pivot = arr[left];
+      // //把所有比基准值小的数放在左边,大的数放在右边
+      while (left < right) {
+        while (left < right && arr[right] > pivot) { // 从右往左找，找到比基准小的数与基准数交换
+          right--;
+        }
+        arr[left] = arr[right]; // 将较小的值放在左边。如果没有找到比基准值小的数，就是将自己赋值给自己（left 等于 right）
+        while (left < right && arr[left] <= pivot) { // 从左往右找，找到比基准大的数与基准数交换
+          left++;
+        }
+        arr[right] = arr[left]; // 将较大的值放在右边。如果没有比基准值大的数，就是将自己赋值给自己（left 等于 right）
+      }
+      arr[left] = pivot; // 将基准值放至中央位置，完成一次循环
+      return left;
+    }
+
+    function quickSort(arr, left, right) {
+      let len = arr.length;
+      left = typeof left != 'number' ? 0 : left,
+        right = typeof right != 'number' ? len - 1 : right;
+      if (left < right) {
+        let pivot = partition(arr, left, right);
+        quickSort(arr, left, pivot - 1); // 将左边的无序数组重复以上排序
+        quickSort(arr, pivot + 1, right); // 将右边的无序数组重复以上排序
+      }
+      return arr;
+    }
+
+    console.log(quickSort([1, 20, 9, 13, 59, 19, 98])) // [1, 9, 13, 19, 20, 59, 98]
+    // console.log(quickSort([5, 3, 7, 6, 4, 1, 0, 2, 9, 10, 8])) // [1, 9, 13, 19, 20, 59, 98]
+  </script> -->
+  <script>
+    const btn = document.querySelector('#btn')
+    function debounce(fn, wait) {
+      let timeout = null
+      return function () {
+        // 每一次点击判断有延迟执行的任务就停止
+        if (timeout !== null) clearTimeout(timeout)
+        // 否则就开启延迟任务
+        timeout = setTimeout(fn, wait)
+      }
+    }
+    function sayDebounce() {
+      console.log("防抖成功！")
+    }
+    btn.addEventListener("click", debounce(sayDebounce, 300))
+  </script>
+
+</body>
+
+</html>
