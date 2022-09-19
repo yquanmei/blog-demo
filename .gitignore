@@ -51,3 +51,6 @@ chrome-plugins/cdsn-copy-code.pem
 #webpack
 webpack/loaders/replace-loader/node_modules
 webpack/loaders/replace-loader/dist
+
+# vue
+vue/*/node_modules
