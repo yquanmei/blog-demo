@@ -10,7 +10,7 @@
 日常学习或写blog的demo
 
 |-- babel-plugins: bable插件  
-    |-- jsx-transform: jsx转换成js  
+    &emsp;|-- jsx-transform: jsx转换成js  
     |-- ui-import: 隔离组件按需加载  
 |-- chrome-plugins：chrome插件  
     |-- csdn-copy-code  
