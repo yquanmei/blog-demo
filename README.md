@@ -8,9 +8,9 @@
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
 -->
 日常学习或写blog的demo
-
+```
 |-- babel-plugins: bable插件  
-    &emsp;|-- jsx-transform: jsx转换成js  
+    &emsp;&nbsp;|-- jsx-transform: jsx转换成js  
     |-- ui-import: 隔离组件按需加载  
 |-- chrome-plugins：chrome插件  
     |-- csdn-copy-code  
@@ -35,5 +35,5 @@
     |-- vue-project：vue项目重温  
 |-- web-cli：脚手架，拉取项目模板  
 |-- webpack  
-
+```
 
