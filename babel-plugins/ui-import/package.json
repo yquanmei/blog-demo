@@ -9,7 +9,8 @@
     "build": "webpack --config webpack.config.js",
     "build:plugin:webpack": "webpack --config webpack.plugin.js",
     "build:plugin:gulp": "node gulp.config.js",
-    "build:plugin:gulp-b2b": "node gulp-b2b.config.js"
+    "build:plugin:gulp-b2b": "node gulp-b2b.config.js",
+    "build:plugin:gulp-test": "node gulp-test.config.js"
   },
   "keywords": [],
   "author": "yquanmei",

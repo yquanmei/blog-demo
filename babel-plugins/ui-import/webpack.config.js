@@ -2,7 +2,7 @@
  * @Author: yquanmei
  * @Date: 2022-07
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-08
+ * @LastEditTime: 2022-09
  * @FilePath: /learn-demo/babel-plugins/ui-import/webpack.config.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
@@ -29,7 +29,8 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
-            plugins: [["./plugin/lib-gulp/index.js"]],
+            plugins: [["./plugin/test-import/lib/index.js"]],
+            // plugins: [["./plugin/lib-gulp/index.js"]],
           },
         },
       },
