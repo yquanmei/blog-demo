@@ -34,6 +34,8 @@
     &emsp;&nbsp;|-- blob：[图片上传压缩，blob](https://www.yuque.com/webfront/js/f3005b97-ccb1-43e1-b0ea-088adb049b58)  
     &emsp;&nbsp;|-- module：模块化  
     &emsp;&nbsp;|-- prototypal-inheritance：原型链继承  
+    &emsp;&nbsp;|-- communication：通信
+        &emsp;&nbsp;&emsp;&nbsp;|-- cross-domain-and-window：[跨域：跨窗口通信](https://www.yuque.com/webfront/js/vo332n)       
 |-- test：暂存  
 |-- vue：vue项目  
     &emsp;&nbsp;|-- vue-project：vue项目重温  

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  我是b页面
+  <script>
+    document.domain = "ichint.com";
+    var a = 100;
+    function aFunc() {
+      console.log(`%c b呀:::`, 'background-color: pink;font-size:14px;')
+      alert('我是b')
+    }
+    const arrowFunc = () => {
+      console.log(`%c 我是箭头函数:::`, 'background-color: pink;font-size:14px;')
+    }
+  </script>
+
+</body>
+
+</html>
