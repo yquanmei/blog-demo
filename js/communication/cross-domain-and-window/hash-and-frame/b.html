@@ -1,0 +1,29 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-10
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-10
+ * @FilePath: /learn-demo/js/communication/cross-domain-and-window/hash-and-frame/b.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  我是b页面
+
+  <script type="text/javascript">
+    window.parent.parent.location.hash = location.hash;
+  </script>
+
+</body>
+
+</html>

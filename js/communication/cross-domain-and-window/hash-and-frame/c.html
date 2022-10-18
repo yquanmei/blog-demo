@@ -1,0 +1,31 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-10
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-10
+ * @FilePath: /learn-demo/js/communication/cross-domain-and-window/hash-and-frame/c.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  我是c页面
+  <script type="text/javascript">
+    console.log(`%c c页面，location.hash:::`, 'background-color: pink;font-size:14px;', location.hash)
+    const iframe = document.createElement("iframe");
+    iframe.src = "http://local.app.ichint.com:5555/js/communication/cross-domain-and-window/hash-and-frame/b.html#name2";
+    document.body.appendChild(iframe);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-10
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-10
+ * @FilePath: /learn-demo/js/communication/cross-domain-and-window/post-message/b.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>B.html</h1>
+  <input type="text" id="statusText" vlaue="msg from b.html">
+  <button id="sendButton" onclick="sendStatus()">向a.html发送消息</button>
+  <p>接收到来自a.html的消息<strong id="status"></strong></p>
+  <script type="text/javascript">
+    function showMsg(msg) {
+      document.getElementById('status').innerHTML = msg
+    }
+    function sendStatus(msg) {
+      const statusText = document.getElementById('statusText').value;
+      if (window.opener) {
+        window.opener.postMessage({ msg: statusText }, "*")
+      }
+    }
+    window.onload = (e) => {
+      window.onmessage = (e) => {
+        let message = e.data.msg
+        showMsg(message)
+      }
+      // 防止不是通过window.open创建的
+      if (window.opener) {
+        window.opener.postMessage({ type: "init" }, "*")
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

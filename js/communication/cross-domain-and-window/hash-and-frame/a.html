@@ -1,0 +1,36 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-10
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-10
+ * @FilePath: /learn-demo/js/communication/cross-domain-and-window/hash-and-frame/a.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn" type="button" onclick="clickBtn()">按钮</button>
+  我是a页面
+  <iframe
+    src="http://local.ichint.com:5555/js/communication/cross-domain-and-window/hash-and-frame/c.html#name1"></iframe>
+  <script>
+    // console.log(location.hash);
+    console.log(`%c a页面，location.hash:::`, 'background-color: pink;font-size:14px;', location.hash)
+    window.onhashchange = function () {
+      // console.log(location.hash);
+      console.log(`%c a页面监听hashchange, location.hash:::`, 'background-color: pink;font-size:14px;', location.hash)
+    };
+  </script>
+
+</body>
+
+</html>

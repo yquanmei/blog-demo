@@ -1,0 +1,52 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-10
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-10
+ * @FilePath: /learn-demo/js/communication/cross-domain-and-window/post-message/a.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>A.com/a.html</h1>
+  <input type="text" id="statusText" vlaue="msg from a.html">
+  <button id="sendButton" onclick="sendStatus()">向b.html发送消息</button>
+  <p>接收来自b.html的消息：<strong id="status"></strong></p>
+  <script type="text/javascript">
+    let newWindow = null
+    const url = 'http://local.ichint.com:5555/js/communication/cross-domain-and-window/post-message/b.html'
+    newWindow = window.open(url);
+
+    function showMsg(msg) {
+      document.getElementById('status').innerHTML = msg
+    }
+
+    function sendStatus() {
+      const statusText = document.getElementById('statusText').value;
+      newWindow.postMessage({ msg: statusText }, "*");
+    }
+
+    window.onmessage = (e) => {
+      // 当接收到新浏览器窗口init信息后，才开始发送消息
+      if (e.data.type == 'init') {
+        // newWindow.postMessage({ msg: "hello" }, "*");
+      }
+      let message = e.data.msg
+      showMsg(message)
+    }
+
+  </script>
+
+</body>
+
+</html>
