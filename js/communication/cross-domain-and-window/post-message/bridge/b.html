@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <h1>我是b页面呀</h1>
+  <input id="ipt" type="text" name="">
+  <button onclick="sub()">sub</button>
+  <p id="cont"></p>
+  <iframe id="iframe1" name="iframe1"
+    src="http://local.test.com:5555/js/communication/cross-domain-and-window/post-message/bridge/bridge.html"
+    style="display: none"></iframe>
+</body>
+<script type="text/javascript">
+
+  var ipt = document.querySelector('#ipt')
+  let win = window.frames.iframe1
+
+  function sub() {
+    win.postMessage({ key: 'info', value: ipt.value }, '*');
+    cont.innerHTML += '我：' + ipt.value + '<br>'
+    ipt.value = ''
+  }
+  window.addEventListener('message', function (e) {
+    if (e.data.key === "info") cont.innerHTML += '对方：' + e.data.value + '<br>'
+  });
+</script>
+
+</html>
