@@ -20,6 +20,8 @@
     &emsp;&nbsp;|-- lottery：[css、canvas、svg 实现抽奖大转盘](https://www.yuque.com/asuncat/blog/qiphg0)    
 |-- chrome-plugins：chrome插件  
     &emsp;&nbsp;|-- csdn-copy-code：[突破csdn限制，复制代码](https://www.yuque.com/asuncat/web/kt8gm1)  
+|-- css：css 
+    &emsp;&nbsp;|-- flex：[flex使用小技巧](https://www.yuque.com/webfront/hbw1gr/noxig3)  
 |-- error-discover：[错误监控，异常捕获](https://www.yuque.com/asuncat/czwynn/oobdyg)    
 |-- interview  
     &emsp;&nbsp;|-- algorithmic-questions: 算法题  
@@ -41,4 +43,6 @@
     &emsp;&nbsp;|-- vue-project：vue项目重温  
 |-- web-cli：[脚手架，拉取项目模板](https://www.yuque.com/webfront/hbw1gr/vgry9p)  
 |-- webpack  
+    &emsp;&nbsp;|-- perf：性能优化 
+        &emsp;&nbsp;&emsp;&nbsp;|-- long-term-cache：[长缓存](https://www.yuque.com/webfront/uukwfk/a4043b67-6fe5-4021-894e-209777ec2b7e)   
 

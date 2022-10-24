@@ -1,9 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/babel-plugins/*/node_modules
-/babel-plugins/*/dist
+node_modules/
+dist/
 /.pnp
 .pnp.js
 
@@ -11,7 +10,7 @@
 /coverage
 
 # production
-/build
+build/
 
 # misc
 .DS_Store
@@ -28,7 +27,7 @@ yarn-error.log*
 /simple-request/egg-example/logs/
 /simple-request/egg-example/npm-debug.log
 /simple-request/egg-example/yarn-error.log
-/simple-request/egg-example/node_modules/
+
 /simple-request/egg-example/package-lock.json
 /simple-request/egg-example/yarn.lock
 /simple-request/egg-example/coverage/
@@ -48,9 +47,3 @@ yarn-error.log*
 chrome-plugins/cdsn-copy-code.crx
 chrome-plugins/cdsn-copy-code.pem
 
-#webpack
-webpack/loaders/replace-loader/node_modules
-webpack/loaders/replace-loader/dist
-
-# vue
-vue/*/node_modules
