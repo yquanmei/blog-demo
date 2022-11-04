@@ -1,0 +1,36 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-10
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-11
+ * @FilePath: /learn-demo/js/store/localStorage/cross-site/bridge.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <h1>hi, 我是localStoreage/cross-site的bridge页面</h1>
+</body>
+<script type="text/javascript">
+  const map = {
+    getItem: (key) => window.localStorage.getItem(key),
+    setItem: (key, value) => window.localStorage.setItem(key, value)
+  }
+  window.addEventListener('message', function (e) {
+    if (e.data.type === 'storage_operate') {
+      const { method = 'getItem', key, value } = e.data;
+      const result = map[method](key, value)
+      const response = { res: result };
+      window.parent.postMessage(response, '*')
+    }
+
+  });
+</script>
+
+</html>

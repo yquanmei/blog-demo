@@ -1,0 +1,42 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-10
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-11
+ * @FilePath: /learn-demo/js/store/localStorage/cross-site/a.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <h1>我是a页面呀</h1>
+  <input id="ipt2" type="text" name="">
+  <button onclick="sub()">sub</button>
+  <p id="cont2"></p>
+  <iframe id="iframe2" name="iframe2" src="http://local.test.com:5555/js/store/localStorage/cross-site/bridge.html"
+    style="display: none"></iframe>
+</body>
+<script type="text/javascript">
+
+  var ipt = document.querySelector('#ipt2')
+  let win = window.frames.iframe2
+
+  function sub() {
+    const request = {
+      method: 'setItem',
+      key: 'localStorage_transfer',
+      value: ipt.value,
+      type: 'storage_operate'
+    }
+    cont2.innerHTML += '存储的localStorage的值：' + ipt.value + '<br>'
+    win.postMessage(request, '*')
+  }
+</script>
+
+</html>

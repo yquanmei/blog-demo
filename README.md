@@ -2,7 +2,7 @@
  * @Author: yquanmei
  * @Date: 2022-05
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-10
+ * @LastEditTime: 2022-11
  * @FilePath: /learn-demo/README.md
  * @Description: 
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
@@ -34,10 +34,13 @@
       &emsp;&nbsp;&emsp;&nbsp;|-- data-optimize：前端一次性渲染多条数据  
 |-- js:JS学习  
     &emsp;&nbsp;|-- blob：[图片上传压缩，blob](https://www.yuque.com/webfront/js/f3005b97-ccb1-43e1-b0ea-088adb049b58)  
+     &emsp;&nbsp;|-- communication：通信
+        &emsp;&nbsp;&emsp;&nbsp;|-- cross-domain-and-window：[跨域：跨窗口通信](https://www.yuque.com/webfront/js/vo332n)  
     &emsp;&nbsp;|-- module：模块化  
     &emsp;&nbsp;|-- prototypal-inheritance：原型链继承  
-    &emsp;&nbsp;|-- communication：通信
-        &emsp;&nbsp;&emsp;&nbsp;|-- cross-domain-and-window：[跨域：跨窗口通信](https://www.yuque.com/webfront/js/vo332n)       
+     &emsp;&nbsp;|-- store：浏览器存储  
+        &emsp;&nbsp;&emsp;&nbsp;|-- localStorage
+            &emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;|--cross-site：[localStorage跨域存储](https://www.yuque.com/webfront/js/wqbeym)      
 |-- test：暂存  
 |-- vue：vue项目  
     &emsp;&nbsp;|-- vue-project：vue项目重温  
