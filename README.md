@@ -34,7 +34,7 @@
       &emsp;&nbsp;&emsp;&nbsp;|-- data-optimize：前端一次性渲染多条数据  
 |-- js:JS学习  
     &emsp;&nbsp;|-- blob：[图片上传压缩，blob](https://www.yuque.com/webfront/js/f3005b97-ccb1-43e1-b0ea-088adb049b58)  
-     &emsp;&nbsp;|-- communication：通信 
+     &emsp;&nbsp;|-- communication：通信   
         &emsp;&nbsp;&emsp;&nbsp;|-- cross-domain-and-window：[跨域：跨窗口通信](https://www.yuque.com/webfront/js/vo332n)  
     &emsp;&nbsp;|-- module：模块化  
     &emsp;&nbsp;|-- prototypal-inheritance：原型链继承  
