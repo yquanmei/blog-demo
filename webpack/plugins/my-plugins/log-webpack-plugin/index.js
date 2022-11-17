@@ -9,20 +9,17 @@
  */
 class LogWebpackPlugin {
   constructor(doneCallback, emitCallback) {
-    console.log(
-      `%c doneCallback:::`,
-      "background-color: pink;font-size:14px;",
-      doneCallback
-    );
     this.emitCallback = emitCallback;
     this.doneCallback = doneCallback;
   }
   apply(compiler) {
     compiler.hooks.emit.tap("LogWebpackPlugin", () => {
-      // 在emit事件中回调 emitCallbackthis.emitCallback()
+      // 在emit事件中回调 emitCallback
+      this.emitCallback();
     });
     compiler.hooks.done.tap("LogWebpackPlugin", (err) => {
-      // 在done事件中回调 doneCallbackthis.doneCallback();
+      // 在done事件中回调 doneCallback
+      this.doneCallback();
     });
     compiler.hooks.compilation.tap("LogWebpackPlugin", () => {
       console.log("this compiler is starting a new compilation...");

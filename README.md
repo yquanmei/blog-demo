@@ -47,5 +47,10 @@
 |-- web-cli：[脚手架，拉取项目模板](https://www.yuque.com/webfront/hbw1gr/vgry9p)  
 |-- webpack  
     &emsp;&nbsp;|-- perf：性能优化  
-        &emsp;&nbsp;&emsp;&nbsp;|-- long-term-cache：[长缓存](https://www.yuque.com/webfront/uukwfk/a4043b67-6fe5-4021-894e-209777ec2b7e)   
+        &emsp;&nbsp;&emsp;&nbsp;|-- long-term-cache：[长缓存](https://www.yuque.com/webfront/uukwfk/a4043b67-6fe5-4021-894e-209777ec2b7e)  
+    &emsp;&nbsp;|-- plugins: webpack插件  
+        &emsp;&nbsp;&emsp;&nbsp;|-- my-plugins 
+            &emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;|-- log-webpack-plugin：打印日志
+
+
 

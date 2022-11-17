@@ -9,8 +9,19 @@
  */
 
 const LogWebpackPlugin = require("./my-plugins/log-webpack-plugin");
+const FriendlyConsoleWebpackPlugin = require("./my-plugins/friendly-console-webpack-plugin");
+
 module.exports = {
   mode: "none",
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [{ loader: "babel-loader" }],
+      },
+    ],
+  },
   plugins: [
     new LogWebpackPlugin(
       () => {
@@ -23,5 +34,9 @@ module.exports = {
         console.log("done事件发生啦，构建完成");
       }
     ),
+    new FriendlyConsoleWebpackPlugin(),
   ],
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  },
 };
