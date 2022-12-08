@@ -2,7 +2,7 @@
  * @Author: yquanmei
  * @Date: 2022-05
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-11
+ * @LastEditTime: 2022-12
  * @FilePath: /learn-demo/README.md
  * @Description: 
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
@@ -51,7 +51,7 @@
     &emsp;&nbsp;|-- perf：性能优化  
         &emsp;&nbsp;&emsp;&nbsp;|-- long-term-cache：[长缓存](https://www.yuque.com/webfront/uukwfk/a4043b67-6fe5-4021-894e-209777ec2b7e)  
     &emsp;&nbsp;|-- plugins: webpack插件  
-        &emsp;&nbsp;&emsp;&nbsp;|-- 项目启动，美化控制台日志
+        &emsp;&nbsp;&emsp;&nbsp;|-- 项目启动，美化控制台日志 
         &emsp;&nbsp;&emsp;&nbsp;|-- log-webpack-plugin：打印日志
 
 
