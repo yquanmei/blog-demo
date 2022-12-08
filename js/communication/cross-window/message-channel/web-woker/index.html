@@ -1,0 +1,36 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-12
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2022-12
+ * @FilePath: /learn-demo/js/communication/cross-window/message-channel/web-worker.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const w1 = new Worker('worker1.js');
+    const w2 = new Worker('worker2.js');
+    const ch = new MessageChannel();
+
+    w1.postMessage('inital port', [ch.port1])
+    w2.postMessage('inital port', [ch.port2])
+
+    w2.onmessage = function (e) {
+      console.log(`%c e.data:::`, 'background-color: pink;font-size:14px;', e.data)
+    }
+  </script>
+
+</body>
+
+</html>

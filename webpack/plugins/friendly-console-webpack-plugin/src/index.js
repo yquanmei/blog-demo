@@ -2,7 +2,7 @@
  * @Author: yquanmei
  * @Date: 2022-11
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-11
+ * @LastEditTime: 2022-12
  * @FilePath: /learn-demo/webpack/plugins/friendly-console-webpack-plugin/src/index.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
@@ -57,7 +57,11 @@ class FriendlyConsoleWebpackPlugin {
     const time = isMultiStats(stats)
       ? this.getMultiStatsCompileTime(stats)
       : this.getStatsCompileTime(stats);
-    output.title("success", "DONE ", "Compiled successfully in " + time + "ms");
+    output.title(
+      "success",
+      "DONE ",
+      "webpack Compiled successfully in " + time + "ms"
+    );
   }
 
   getStatsCompileTime(stats, statsIndex) {
