@@ -9,3 +9,4 @@
  */
 console.log("that is a good idea");
 console.log(`%c good:::`, "background-color: pink;font-size:14px;", good);
+consol;

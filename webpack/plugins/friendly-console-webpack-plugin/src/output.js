@@ -2,7 +2,7 @@
  * @Author: yquanmei
  * @Date: 2022-11
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-11
+ * @LastEditTime: 2022-12
  * @FilePath: /learn-demo/webpack/plugins/friendly-console-webpack-plugin/src/output.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
@@ -28,6 +28,7 @@ class Debuger {
   title(severity, title, subtitle) {
     if (this.enabled) {
       const date = new Date();
+      this.log("\n");
       const dateString = chalk.grey(date.toLocaleTimeString());
       const titleFormatted = colors.formatTitle(severity, title);
       const subTitleFormatted = colors.formatText(severity, subtitle);
