@@ -3,7 +3,7 @@
  * @Date: 2022-11
  * @LastEditors: yquanmei
  * @LastEditTime: 2022-12
- * @FilePath: /learn-demo/webpack/plugins/friendly-console-webpack-plugin/examples/success/example.js
+ * @FilePath: /learn-demo/webpack/plugins/friendly-console-webpack-plugin/test/success/index.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */

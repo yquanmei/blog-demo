@@ -3,7 +3,7 @@
  * @Date: 2022-11
  * @LastEditors: yquanmei
  * @LastEditTime: 2022-12
- * @FilePath: /learn-demo/webpack/plugins/friendly-console-webpack-plugin/tests/success/webpack.config.js
+ * @FilePath: /learn-demo/webpack/plugins/friendly-console-webpack-plugin/test/success/webpack.config.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
@@ -16,7 +16,6 @@
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
-const { NONAME } = require("dns");
 const path = require("path");
 const FriendlyConsoleWebpackPlugin = require("../..");
 module.exports = {

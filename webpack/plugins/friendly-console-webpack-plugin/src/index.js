@@ -8,6 +8,7 @@
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
 // const output = require("./output");
+const { Compilation } = require("webpack");
 const output = require("./output");
 class FriendlyConsoleWebpackPlugin {
   constructor(options) {
@@ -43,6 +44,8 @@ class FriendlyConsoleWebpackPlugin {
       name: "FriendlyConsoleWebpackPlugin",
     };
     compiler.hooks.done.tap(plugin, doneFn);
+    // const t1 = compilation.getStats();
+    // console.log(`%c t1:::`, "background-color: pink;font-size:14px;", t1);
     // } else {
     //   compiler.plugin("done", doneFn);
     // }

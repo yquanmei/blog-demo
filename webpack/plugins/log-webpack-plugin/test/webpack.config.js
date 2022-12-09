@@ -2,26 +2,17 @@
  * @Author: yquanmei
  * @Date: 2022-11
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-11
- * @FilePath: /learn-demo/webpack/plugins/webpack.config.js
+ * @LastEditTime: 2022-12
+ * @FilePath: /learn-demo/webpack/plugins/log-webpack-plugin/test/webpack.config.js
  * @Description:
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved.
  */
-
-const LogWebpackPlugin = require("./my-plugins/log-webpack-plugin");
-const FriendlyConsoleWebpackPlugin = require("./my-plugins/friendly-console-webpack-plugin");
+const path = require("path");
+const LogWebpackPlugin = require("../src/index");
 
 module.exports = {
   mode: "none",
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [{ loader: "babel-loader" }],
-      },
-    ],
-  },
+  entry: path.join(__dirname, "./index.js"),
   plugins: [
     new LogWebpackPlugin(
       () => {
@@ -34,7 +25,6 @@ module.exports = {
         console.log("done事件发生啦，构建完成");
       }
     ),
-    new FriendlyConsoleWebpackPlugin(),
   ],
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],

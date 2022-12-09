@@ -5,7 +5,8 @@
   "main": "replace-loader.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "test:simple": "cross-env COMPANY_NAME=网络 webpack --config ./test/simple/webpack.config.js",
+    "test:two": "webpack --config ./test/two-loaders/webpack.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "webpack": "^5.74.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "webpack-cli": "^4.10.0"
   }
 }
