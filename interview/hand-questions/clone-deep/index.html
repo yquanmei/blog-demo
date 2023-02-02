@@ -2,8 +2,8 @@
  * @Author: yquanmei
  * @Date: 2022-05
  * @LastEditors: yquanmei
- * @LastEditTime: 2022-05
- * @FilePath: /blog-demo/interview/clone-deep/index.html
+ * @LastEditTime: 2023-02
+ * @FilePath: /learn-demo/interview/hand-questions/clone-deep/index.html
  * @Description: 
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
 -->
@@ -62,7 +62,7 @@
      * @param {*} hash 记录，处理循环引用
      * @return {*}
      */
-    function initByTag(value, tag, hash) {
+    function initByTag(tag, value, hash) {
 
       // if (value instanceof HTMLElement) {
       if (value instanceof Node) {
@@ -112,13 +112,11 @@
       // 如果要拷贝原型链上的属性，需要用for...in + getOwnPropertySymbols
       Reflect.ownKeys(source).forEach(key => { // 改动
         const value = source[key]
-        let result // 新对象的属性值
+        let result = value // 新对象的属性值 // 如果是函数，直接赋值
 
         if (isObject(value)) {
           const tag = Object.prototype.toString.call(value);
-          result = initByTag(value, tag, hash);
-        } else {
-          result = value // 如果是函数，直接赋值
+          result = initByTag(tag, value, hash);
         }
         target[key] = result;
       })

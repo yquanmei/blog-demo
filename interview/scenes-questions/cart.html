@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script crossorigin src="https://unpkg.com/react@16.8.4/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16.8.4/umd/react-dom.development.js"></script>
-<script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16.8.4/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 </head>
+
 <body>
   <style>
     html {
       font-size: 100px;
     }
-    body{
+
+    body {
       font-size: 0.14rem;
     }
+
     .card {
       width: 4.3rem;
       height: 1.36rem;
@@ -27,14 +31,17 @@
       display: flex;
       align-items: center;
     }
-    .card>div{
+
+    .card>div {
       flex: 1 1 0;
     }
-    .title{
+
+    .title {
       font-size: 0.24rem;
       font-weight: bold;
     }
-    .sub-title{
+
+    .sub-title {
       font-size: 0.22rem;
       /* text-overflow: -o-ellipsis-lastline; */
       overflow: hidden;
@@ -44,7 +51,7 @@
       -webkit-box-orient: vertical;
     }
 
-    button{
+    button {
       width: 1.08rem;
       height: 0.45rem;
       border-radius: 0.08rem;
@@ -53,88 +60,88 @@
       color: #fff;
       border: 0;
     }
-    
   </style>
   <div id="app-react"></div>
   <script type="text/babel">
     const cardDataList: IDirectVoucher[] = [
-  {
-    title: '杭州市通用5元券',
-    subTitle: '杭味面馆非常好吃，太好吃了，相当不错，味道鲜美，特别划算，快快抢购，聚划算',
-  },
-  {
-    title: '杭州市10元券',
-    subTitle: '兰州拉面非常好吃',
-  },
-];
-      /** 这里是react实现方式**/
-  const CardReact: React.FC<ICardProps> = (props) => {
-    const { data } = props;
-    const { useState, useEffect, useRef, useCallback } = React;
-    const [btnText, setBtnText] = useState('10s');
-    const [seconds, setSeconds] = useState(10);
-    let timeChange = useRef();
-    
-    // func：mock
-    const mockAjax = () => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({
-            code: 200,
-            message: '抢购成功'
-          })
-        }, 1000)
-      })
-    }
+      {
+        title: '杭州市通用5元券',
+        subTitle: '杭味面馆非常好吃，太好吃了，相当不错，味道鲜美，特别划算，快快抢购，聚划算',
+      },
+      {
+        title: '杭州市10元券',
+        subTitle: '兰州拉面非常好吃',
+      },
+    ];
+    /** 这里是react实现方式**/
+    const CardReact: React.FC<ICardProps> = (props) => {
+      const { data } = props;
+      const { useState, useEffect, useRef, useCallback } = React;
+      const [btnText, setBtnText] = useState('10s');
+      const [seconds, setSeconds] = useState(10);
+      let timeChange = useRef();
 
-    // func：点击抢购按钮
-    const toBuy = () => {
-      if(seconds > 0) return;
-      mockAjax().then((res) => {
-        if (res.code === 200) {
+      // func：mock
+      const mockAjax = () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({
+              code: 200,
+              message: '抢购成功'
+            })
+          }, 1000)
+        })
+      }
+
+      // func：点击抢购按钮
+      const toBuy = () => {
+        if (seconds > 0) return;
+        mockAjax().then((res) => {
+          if (res.code === 200) {
             setBtnText('已抢购');
           }
-      })
-    }
-    
-    useEffect(() => {
-      if(seconds > 0) {
-        setBtnText(`${seconds}s`)
-      } else if (seconds <= 0) {
-        setBtnText('抢购')
-        clearInterval(timeChange.current);
+        })
       }
-    }, [seconds]);
 
-    useEffect(() => {
-      timeChange.current = setInterval(() => setSeconds(t => --t), 1000);  // 要用setInterval，不能用setTimeout，因为setInterval是内部调度程序每隔一定时间执行一次func，但是setTimeout的下一次调用是在前一次调用完成时再调度的
-      return () => clearInterval(timeChange.current);
-    }, [])
+      useEffect(() => {
+        if (seconds > 0) {
+          setBtnText(`${seconds}s`)
+        } else if (seconds <= 0) {
+          setBtnText('抢购')
+          clearInterval(timeChange.current);
+        }
+      }, [seconds]);
 
-    return (
-      <div className="card">
-        <div className="left">
-          <div className="title">{data.title}</div>
-          <div className="sub-title">{data.subTitle}</div>
+      useEffect(() => {
+        timeChange.current = setInterval(() => setSeconds(t => --t), 1000);  // 要用setInterval，不能用setTimeout，因为setInterval是内部调度程序每隔一定时间执行一次func，但是setTimeout的下一次调用是在前一次调用完成时再调度的
+        return () => clearInterval(timeChange.current);
+      }, [])
+
+      return (
+        <div className="card">
+          <div className="left">
+            <div className="title">{data.title}</div>
+            <div className="sub-title">{data.subTitle}</div>
+          </div>
+          <button onClick={toBuy}>{btnText}</button>
         </div>
-         <button onClick={toBuy}>{btnText}</button>
-      </div>
-    );
-  };
+      );
+    };
 
-  const CardList: React.FC<{ list: IDirectVoucher[] }> = (props) => {
-    return (
-      <React.Fragment>
-        {props.list.map((data, index) => (
-          <CardReact key={index} data={data} />
-        ))}
-      </React.Fragment>
-    );
-  };
+    const CardList: React.FC<{ list: IDirectVoucher[] }> = (props) => {
+      return (
+        <React.Fragment>
+          {props.list.map((data, index) => (
+            <CardReact key={index} data={data} />
+          ))}
+        </React.Fragment>
+      );
+    };
 
-  // const root = ReactDOM.createRoot(document.getElementById('app-react'));
-  // root.render(<CardList list={cardDataList} />);
+    // const root = ReactDOM.createRoot(document.getElementById('app-react'));
+    // root.render(<CardList list={cardDataList} />);
     ReactDOM.render(<CardList list={cardDataList} />, document.getElementById('app-react'));
-  </script> 
+  </script>
 </body>
+
 </html>
