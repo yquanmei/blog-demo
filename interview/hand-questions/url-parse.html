@@ -1,0 +1,39 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2023-02
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2023-02
+ * @FilePath: /learn-demo/interview/hand-questions/url-parse.html
+ * @Description: 
+ * Copyright (c) 2023 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解析url参数</title>
+</head>
+
+<body>
+  <script>
+    function getUrlParams(url) {
+      let reg = /([^?&]+)=([^?&]+)/g
+      let obj = {}
+      url.replace(/#\S*/, '').replace(reg, (m, $1, $2) => {
+        obj[$1] = decodeURI($2)
+      })
+      return obj
+    }
+
+    // 测试用例
+    let url = 'https://www.junjin.cn?a=1&b=2'
+    console.log(getUrlParams(url)) // { a: 1, b: 2 }
+
+  </script>
+
+</body>
+
+</html>

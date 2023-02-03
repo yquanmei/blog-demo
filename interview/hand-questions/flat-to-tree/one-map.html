@@ -1,0 +1,70 @@
+<!--
+ * @Author: yquanmei
+ * @Date: 2022-10
+ * @LastEditors: yquanmei
+ * @LastEditTime: 2023-02
+ * @FilePath: /learn-demo/interview/hand-questions/flat-to-tree/one-map.html
+ * @Description: 
+ * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    let arr = [
+      { id: 5, name: '部门5', pid: 4 },
+      { id: 1, name: '部门1', pid: 0 },
+      { id: 2, name: '部门2', pid: 1 },
+      { id: 3, name: '部门3', pid: 1 },
+      { id: 4, name: '部门4', pid: 3 },
+
+    ]
+
+  </script>
+  <script>
+    function arrayToTree(items) {
+      const result = [];   // 存放结果集
+      const itemMap = {};
+      for (const item of items) {
+        const id = item.id;
+        const pid = item.pid;
+
+        if (!itemMap[id]) {
+          itemMap[id] = { // 改变itemMap
+            children: [],
+          }
+        }
+
+        itemMap[id] = { // 改变itemMap
+          ...item,
+          children: itemMap[id]['children'] // ⭐️
+        }
+
+        const treeItem = itemMap[id];
+
+        if (pid === 0) { // ⭐️
+          result.push(treeItem); // 这里得到result
+        } else {
+          if (!itemMap[pid]) {
+            itemMap[pid] = { // 改变itemMap
+              children: [],
+            }
+          }
+          itemMap[pid].children.push(treeItem) // 改变itemMap
+        }
+      }
+      return result;
+    }
+  </script>
+</body>
+
+</html>
