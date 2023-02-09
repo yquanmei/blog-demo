@@ -60,6 +60,10 @@
       color: #fff;
       border: 0;
     }
+
+    .disabled {
+      background-color: #aaa;
+    }
   </style>
   <div id="app-react"></div>
   <script type="text/babel">
@@ -79,6 +83,8 @@
       const { useState, useEffect, useRef, useCallback } = React;
       const [btnText, setBtnText] = useState('10s');
       const [seconds, setSeconds] = useState(10);
+      const [disabled, setDisabled] = useState(false);
+
       let timeChange = useRef();
 
       // func：mock
@@ -94,13 +100,13 @@
       }
 
       // func：点击抢购按钮
-      const toBuy = () => {
+      const toBuy = async () => {
         if (seconds > 0) return;
-        mockAjax().then((res) => {
-          if (res.code === 200) {
-            setBtnText('已抢购');
-          }
-        })
+        const res = await mockAjax()
+        if (res.code === 200) {
+          setDisabled(true);
+          setBtnText('已抢购');
+        }
       }
 
       useEffect(() => {
@@ -123,7 +129,7 @@
             <div className="title">{data.title}</div>
             <div className="sub-title">{data.subTitle}</div>
           </div>
-          <button onClick={toBuy}>{btnText}</button>
+          <button onClick={toBuy} disabled={disabled} className={disabled ? 'disabled' : ''}>{btnText}</button>
         </div>
       );
     };
