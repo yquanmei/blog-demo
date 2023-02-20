@@ -36,7 +36,7 @@
 &emsp;&nbsp;&emsp;&nbsp;|-- throttle-debounce：前端一次性渲染多条数据
 |-- js:JS 学习  
  &emsp;&nbsp;|-- data:数据类型
-&emsp;&nbsp;&emsp;&nbsp;|-- deep-compare-object：[对象比较](https://www.yuque.com/webfront/js/le56hr#NiQ9R)
+&emsp;&nbsp;&emsp;&nbsp;|-- deep-compare-object：[对象比较] (https://www.yuque.com/webfront/js/le56hr#NiQ9R)
 &emsp;&nbsp;|-- blob：[图片上传压缩，blob](https://www.yuque.com/webfront/js/f3005b97-ccb1-43e1-b0ea-088adb049b58)  
  &emsp;&nbsp;|-- communication：通信  
  &emsp;&nbsp;&emsp;&nbsp;|-- cross-domain-and-window：[跨域：跨窗口通信](https://www.yuque.com/webfront/js/vo332n)  
