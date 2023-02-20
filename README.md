@@ -32,11 +32,11 @@
  &emsp;&nbsp;&emsp;&nbsp;|-- url-parse：[扁平数组结构转树](https://www.yuque.com/webfront/tu3uvd/fnspou)  
  &emsp;&nbsp;|-- scenes-questions: 场景题  
  &emsp;&nbsp;&emsp;&nbsp;|-- cart.html：[购物车](https://www.yuque.com/webfront/tu3uvd/eopi0h)  
- &emsp;&nbsp;&emsp;&nbsp;|-- data-optimize：前端一次性渲染多条数据
+ &emsp;&nbsp;&emsp;&nbsp;|-- data-optimize：前端一次性渲染多条数据  
 &emsp;&nbsp;&emsp;&nbsp;|-- throttle-debounce：前端一次性渲染多条数据
 |-- js:JS 学习  
- &emsp;&nbsp;|-- data:数据类型
-&emsp;&nbsp;&emsp;&nbsp;|-- deep-compare-object：[对象比较] (https://www.yuque.com/webfront/js/le56hr#NiQ9R)
+ &emsp;&nbsp;|-- data:数据类型  
+&emsp;&nbsp;&emsp;&nbsp;|-- deep-compare-object：[对象比较] (https://www.yuque.com/webfront/js/le56hr#NiQ9R)  
 &emsp;&nbsp;|-- blob：[图片上传压缩，blob](https://www.yuque.com/webfront/js/f3005b97-ccb1-43e1-b0ea-088adb049b58)  
  &emsp;&nbsp;|-- communication：通信  
  &emsp;&nbsp;&emsp;&nbsp;|-- cross-domain-and-window：[跨域：跨窗口通信](https://www.yuque.com/webfront/js/vo332n)  
@@ -50,10 +50,10 @@
  &emsp;&nbsp;|-- vue-project：vue 项目重温  
 |-- web-cli：[脚手架，拉取项目模板](https://www.yuque.com/webfront/hbw1gr/vgry9p)  
 |-- webpack  
- &emsp;&nbsp;|--loaders
-&emsp;&nbsp;&emsp;&nbsp;|--replace-loader：[loader 编写](https://www.yuque.com/deepstates/blog/ggb73z4v5yfvk259)
+ &emsp;&nbsp;|--loaders  
+&emsp;&nbsp;&emsp;&nbsp;|--replace-loader：[loader 编写](https://www.yuque.com/deepstates/blog/ggb73z4v5yfvk259)  
 &emsp;&nbsp;|-- perf：性能优化  
  &emsp;&nbsp;&emsp;&nbsp;|-- long-term-cache：[长缓存](https://www.yuque.com/webfront/uukwfk/a4043b67-6fe5-4021-894e-209777ec2b7e)  
  &emsp;&nbsp;|-- plugins: webpack 插件  
- &emsp;&nbsp;&emsp;&nbsp;|-- friendly-console-webpack-plugin[项目启动，美化控制台日志](https://www.yuque.com/deepstates/blog/lc9morhsfvazkrvq)
+ &emsp;&nbsp;&emsp;&nbsp;|-- friendly-console-webpack-plugin[项目启动，美化控制台日志](https://www.yuque.com/deepstates/blog/lc9morhsfvazkrvq)  
 &emsp;&nbsp;&emsp;&nbsp;|-- log-webpack-plugin：打印日志
